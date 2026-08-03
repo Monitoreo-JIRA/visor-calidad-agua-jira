@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Visor de Calidad del Agua - JIRA
+    </title>
+
+    <!-- Estilos de Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+
+    <!-- Estilos del visor -->
+    <link
+        rel="stylesheet"
+        href="css/estilos.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================
+         ENCABEZADO
+    ====================================== -->
+
+    <header class="encabezado">
+
+        <div class="identidad">
+
+            <div class="contenedor-logo">
+                <img
+                    src="images/logo_jira.png"
+                    alt="Logotipo de la JIRA"
+                    class="logo-jira"
+                >
+            </div>
+
+            <div
+    class="ondas-encabezado"
+    aria-hidden="true"
+>
+    <svg
+        viewBox="0 0 520 120"
+        preserveAspectRatio="none"
+    >
+        <path
+            class="onda onda-1"
+            d="M-40 38
+               C20 8, 80 68, 140 38
+               S260 8, 320 38
+               S440 68, 560 30"
+        />
+
+        <path
+            class="onda onda-2"
+            d="M-80 67
+               C-10 37, 60 97, 130 67
+               S270 37, 340 67
+               S480 97, 600 58"
+        />
+
+        <path
+            class="onda onda-3"
+            d="M-20 94
+               C40 70, 100 112, 160 88
+               S280 64, 340 88
+               S460 112, 570 82"
+        />
+    </svg>
+</div>
+
+            <div class="titulos-visor">
+
+                <h1>
+                    Visor Histórico de Calidad del Agua
+                </h1>
+
+                <p>
+                    Junta Intermunicipal de Medio Ambiente para la
+                    Gestión Integral de la Cuenca Baja del Río Ayuquila
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+    <!-- =====================================
+         CONTENIDO PRINCIPAL
+    ====================================== -->
+
+    <main class="contenedor-app">
+
+        <!-- Panel lateral -->
+
+        <aside class="panel-lateral">
+
+            <div class="panel-titulo">
+
+                <span>
+                    Consulta de información
+                </span>
+
+                <button
+                    id="boton-panel"
+                    type="button"
+                    aria-label="Ocultar panel"
+                >
+                    ‹
+                </button>
+
+            </div>
+
+
+            <div class="panel-contenido">
+
+                <!-- Botones de módulos -->
+
+                <button
+                    class="boton-seccion activo"
+                    id="boton-bacteriologico"
+                    type="button"
+                >
+                    Monitoreo bacteriológico
+                </button>
+
+                <button
+                    class="boton-seccion"
+                    id="boton-fisicoquimicos"
+                    type="button"
+                >
+                    Parámetros fisicoquímicos
+                </button>
+
+
+                <!-- Filtros compartidos -->
+
+                <section class="tarjeta-filtros">
+
+                    <label for="filtro-anio">
+                        Año de consulta
+                    </label>
+
+                    <select id="filtro-anio">
+                        <option value="">
+                            Seleccionar...
+                        </option>
+                    </select>
+
+
+                    <label for="filtro-mes">
+                        Mes
+                    </label>
+
+                    <select id="filtro-mes">
+                        <option value="">
+                            Selecciona primero un año
+                        </option>
+                    </select>
+
+
+                    <button
+                        class="boton-consulta"
+                        type="button"
+                    >
+                        Consultar
+                    </button>
+
+                </section>
+
+
+                <!-- Botón compartido de gráficas -->
+
+                <button
+                    class="boton-seccion"
+                    id="boton-graficas"
+                    type="button"
+                >
+                    Gráficas
+                </button>
+
+
+                <!-- =================================
+                     CONTENIDO BACTERIOLÓGICO
+                ================================== -->
+
+               <div id="contenido-bacteriologico">
+
+    <button
+        class="boton-seccion"
+        id="boton-reporte"
+        type="button"
+    >
+        Reporte anual por sitio
+    </button>
+
+    <button
+        class="boton-seccion"
+        id="boton-reporte-general"
+        type="button"
+    >
+        Reporte anual general
+    </button>
+
+    <section class="panel-leyenda">
+
+                        <h2>
+                            Simbología
+                        </h2>
+
+                        <p>
+                            <span class="simbolo apto"></span>
+                            Apto
+                        </p>
+
+                        <p>
+                            <span class="simbolo moderado"></span>
+                            Cerca del criterio
+                        </p>
+
+                        <p>
+                            <span class="simbolo no-apto"></span>
+                            No apto
+                        </p>
+
+                        <p>
+                            <span class="simbolo sin-datos"></span>
+                            Sin datos
+                        </p>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =================================
+                     CONTENIDO FISICOQUÍMICO
+                ================================== -->
+
+                <div
+                    id="contenido-fisicoquimico"
+                    class="oculto"
+                >
+
+                    <section class="tabla-fisicoquimica">
+
+                        <h2>
+                            Parámetros fisicoquímicos
+                        </h2>
+
+                        <p
+                            class="fisicoquimico-contexto"
+                            id="fisicoquimico-contexto"
+                        >
+                            Selecciona un año, un mes y un sitio
+                            en el mapa.
+                        </p>
+
+
+                        <div class="fisicoquimico-sitio">
+
+                            <strong id="fisicoquimico-nombre">
+                                Sitio no seleccionado
+                            </strong>
+
+                            <span id="fisicoquimico-periodo">
+                                Sin periodo
+                            </span>
+
+                        </div>
+
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Parámetro
+                                    </th>
+
+                                    <th>
+                                        Resultado
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        pH
+                                    </td>
+
+                                    <td id="resultado-ph">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Oxígeno disuelto
+                                    </td>
+
+                                    <td id="resultado-od-mg">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Saturación de OD
+                                    </td>
+
+                                    <td id="resultado-od-pct">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Temperatura del agua
+                                    </td>
+
+                                    <td id="resultado-temperatura">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Conductividad
+                                    </td>
+
+                                    <td id="resultado-conductividad">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        TDS
+                                    </td>
+
+                                    <td id="resultado-tds">
+                                        —
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Salinidad
+                                    </td>
+
+                                    <td id="resultado-salinidad">
+                                        —
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Mapa -->
+
+        <section class="zona-mapa">
+            <div id="map"></div>
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         VENTANA DE GRÁFICAS
+    ====================================== -->
+
+    <div
+        class="modal-grafica oculto"
+        id="modal-grafica"
+    >
+
+        <div class="ventana-grafica">
+
+            <!-- Encabezado del modal -->
+
+            <div class="encabezado-grafica">
+
+                <div class="informacion-grafica">
+
+                    <h2 id="titulo-grafica">
+                        Histórico del sitio
+                    </h2>
+
+                    <p id="subtitulo-grafica">
+                        Selecciona un sitio en el mapa.
+                    </p>
+
+
+                    <div
+                        id="selector-parametro-grafica"
+                        class="selector-parametro-grafica oculto"
+                    >
+
+                        <label for="parametro-fisicoquimico-grafica">
+                            Parámetro
+                        </label>
+
+                        <select id="parametro-fisicoquimico-grafica">
+
+                            <option value="pH">
+                                pH
+                            </option>
+
+                            <option value="Oxigeno_Disuelto_mg_L">
+                                Oxígeno disuelto (mg/L)
+                            </option>
+
+                            <option value="Oxigeno_Disuelto_pct">
+                                Saturación de OD (%)
+                            </option>
+
+                            <option value="Temperatura_Agua_C">
+                                Temperatura del agua (°C)
+                            </option>
+
+                            <option value="Conductividad_uS_cm">
+                                Conductividad (µS/cm)
+                            </option>
+
+                            <option value="TDS_ppm">
+                                TDS (ppm)
+                            </option>
+
+                            <option value="Salinidad_PSU">
+                                Salinidad (PSU)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="cerrar-grafica"
+                    type="button"
+                    aria-label="Cerrar gráfica"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Área exclusiva de la gráfica -->
+
+            <div class="contenedor-grafica">
+                <canvas id="grafica-historica"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- =====================================
+     VENTANA DE REPORTE ANUAL
+====================================== -->
+
+<!-- =====================================
+     VENTANA DE REPORTE ANUAL
+====================================== -->
+
+<div
+    class="modal-reporte oculto"
+    id="modal-reporte"
+>
+    <div class="ventana-reporte">
+
+        <header class="encabezado-reporte">
+
+            <div class="encabezado-reporte-principal">
+
+                <img
+                    src="images/logo_jira.png"
+                    alt="Logotipo de la JIRA"
+                    class="logo-reporte"
+                >
+
+                <div class="identidad-reporte">
+
+                    <p class="institucion-reporte">
+                        Junta Intermunicipal de Medio Ambiente para la
+                        Gestión Integral de la Cuenca del Río Ayuquila
+                        (JIRA)
+                    </p>
+
+                    <h2>
+                        Reporte anual de calidad del agua
+                    </h2>
+
+                    <div class="datos-principales-reporte">
+
+                        <p>
+                            <strong>Sitio:</strong>
+                            <span id="titulo-reporte">
+                                Sitio de monitoreo
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Año:</strong>
+                            <span id="anio-reporte">
+                                —
+                            </span>
+                        </p>
+
+                    </div>
+
+                    <p
+                        class="fecha-reporte"
+                        id="fecha-reporte"
+                    >
+                        Fecha de generación:
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="acciones-reporte">
+
+                <button
+                    id="imprimir-reporte"
+                    type="button"
+                >
+                    Imprimir / Guardar PDF
+                </button>
+
+                <button
+                    id="cerrar-reporte"
+                    type="button"
+                    aria-label="Cerrar reporte"
+                    title="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <div
+            class="contenido-reporte"
+            id="contenido-reporte"
+        >
+            <!-- El reporte se genera desde JavaScript -->
+        </div>
+
+    </div>
+</div>
+<!-- =====================================
+     REPORTE ANUAL GENERAL
+====================================== -->
+
+<div
+    class="modal-reporte oculto"
+    id="modal-reporte-general"
+>
+    <div class="ventana-reporte">
+
+        <header class="encabezado-reporte">
+
+            <div class="encabezado-reporte-principal">
+
+                <img
+                    src="images/logo_jira.png"
+                    alt="Logotipo de la JIRA"
+                    class="logo-reporte"
+                >
+
+                <div class="identidad-reporte">
+
+                    <p class="institucion-reporte">
+                        Junta Intermunicipal de Medio Ambiente para la
+                        Gestión Integral de la Cuenca del Río Ayuquila
+                        (JIRA)
+                    </p>
+
+                    <h2>
+                        Reporte anual general de calidad del agua
+                    </h2>
+
+                    <div class="datos-principales-reporte">
+
+                        <p>
+                            <strong>Año:</strong>
+
+                            <span id="anio-reporte-general">
+                                —
+                            </span>
+                        </p>
+
+                    </div>
+
+                    <p
+                        class="fecha-reporte"
+                        id="fecha-reporte-general"
+                    >
+                        Fecha de generación:
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="acciones-reporte">
+
+                <button
+                    id="imprimir-reporte-general"
+                    type="button"
+                >
+                    Imprimir / Guardar PDF
+                </button>
+
+                <button
+                    id="cerrar-reporte-general"
+                    type="button"
+                    aria-label="Cerrar reporte general"
+                    title="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </header>
+
+        <div
+            class="contenido-reporte"
+            id="contenido-reporte-general"
+        >
+            <!-- Se genera desde JavaScript -->
+        </div>
+
+    </div>
+</div>
+
+    <!-- =====================================
+         PIE DE PÁGINA
+    ====================================== -->
+
+    <footer class="pie">
+        Fuente: JIRA. Monitoreo de calidad del agua superficial.
+    </footer>
+
+
+    <!-- =====================================
+         LIBRERÍAS
+    ====================================== -->
+
+    <!-- Leaflet -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+
+    <!-- SheetJS para leer Excel -->
+
+    <script
+        src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"
+    ></script>
+
+
+    <!-- Chart.js -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+
+    <!-- Plugin de línea de referencia -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"
+    ></script>
+
+
+    <!-- =====================================
+         ARCHIVOS DEL VISOR
+    ====================================== -->
+
+    <script src="js/mapa.js"></script>
+
+    <script src="js/capas.js"></script>
+
+    <script src="js/subcuencas.js"></script>
+
+    <script src="js/cauces.js"></script>
+
+    <script src="js/datos.js"></script>
+
+    <script src="js/sitios.js"></script>
+
+    <script src="js/modulos.js"></script>
+
+    <script src="js/fisicoquimicos.js"></script>
+
+    <script src="js/consultas.js?v=2"></script>
+
+    <script src="js/graficas.js"></script>
+
+    <script src="js/reporte.js"></script>
+
+    <script src="js/reporte_general.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
