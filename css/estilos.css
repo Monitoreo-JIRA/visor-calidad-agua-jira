@@ -1451,3 +1451,172 @@ body.panel-abierto .leaflet-control-scale {
     color: #176f8f;
     font-weight: 700;
 }
+/* ==========================================
+   TOUR INTERACTIVO JIRA
+========================================== */
+
+.tour-jira.driver-popover {
+    width: min(430px, calc(100vw - 32px));
+    max-width: 430px;
+
+    padding: 20px;
+
+    border-radius: 10px;
+    background-color: white;
+
+    box-shadow:
+        0 14px 38px rgba(0, 0, 0, 0.28);
+}
+
+.tour-jira .driver-popover-title {
+    color: #263238;
+    font-size: 21px;
+    line-height: 1.2;
+}
+
+.tour-jira .driver-popover-description {
+    color: #526873;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.tour-jira .driver-popover-progress-text {
+    color: #77878e;
+    font-size: 12px;
+}
+
+.tour-jira .driver-popover-next-btn,
+.tour-jira .driver-popover-prev-btn {
+    padding: 7px 12px;
+
+    border: 1px solid #176f8f;
+    border-radius: 4px;
+
+    text-shadow: none;
+    font-size: 12px;
+}
+
+.tour-jira .driver-popover-next-btn {
+    background-color: #176f8f;
+    color: white;
+}
+
+.tour-jira .driver-popover-next-btn:hover {
+    background-color: #125e79;
+}
+
+.tour-jira .driver-popover-prev-btn {
+    background-color: white;
+    color: #176f8f;
+}
+
+.tour-jira .driver-popover-close-btn {
+    color: #526674;
+}
+
+
+/* Introducción */
+
+.tour-intro-modulos {
+    margin-top: 4px;
+}
+
+.tour-introduccion {
+    margin: 0 0 14px;
+
+    color: #526873;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.tour-modulo {
+    margin-top: 9px;
+    padding: 10px 11px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    border: 1px solid #d6e0e4;
+    border-radius: 7px;
+
+    background-color: #f7fafb;
+}
+
+.tour-icono-gota {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #e7f2f6;
+    color: #176f8f;
+}
+
+.tour-icono-gota svg {
+    width: 26px;
+    height: 26px;
+    overflow: visible;
+}
+
+.tour-icono-gota path,
+.tour-icono-gota circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tour-modulo-texto {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.tour-modulo-texto strong {
+    color: #263238;
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.tour-modulo-texto small {
+    color: #60717a;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+
+/* Tablet y celular */
+
+@media (max-width: 600px) {
+
+    .tour-jira.driver-popover {
+        padding: 16px;
+    }
+
+    .tour-jira .driver-popover-title {
+        font-size: 18px;
+    }
+
+    .tour-modulo {
+        align-items: flex-start;
+    }
+
+    .tour-icono-gota {
+        width: 35px;
+        height: 35px;
+    }
+
+    .tour-icono-gota svg {
+        width: 23px;
+        height: 23px;
+    }
+}
