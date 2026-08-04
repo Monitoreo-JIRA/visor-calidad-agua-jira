@@ -3,10 +3,16 @@
 // ==========================================
 
 // Crear el mapa y centrarlo en la región de la JIRA
-const map = L.map('map').setView(
+const map = L.map('map', {
+    zoomControl: false
+}).setView(
     [19.55, -104.20],
     9
 );
+
+L.control.zoom({
+    position: 'topright'
+}).addTo(map);
 
 // Crear panel para las subcuencas
 map.createPane('subcuencasPane');

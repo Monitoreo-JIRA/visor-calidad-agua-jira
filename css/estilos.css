@@ -1,14 +1,20 @@
+/* =========================================================
+   VISOR HISTÓRICO DE CALIDAD DEL AGUA — JIRA
+   Hoja de estilos consolidada
+
+   Se eliminaron reglas duplicadas conservando los valores
+   finales que estaban activos en la hoja original.
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
-
 html,
 body {
     width: 100%;
     height: 100%;
     margin: 0;
 }
-
 body {
     display: flex;
     flex-direction: column;
@@ -17,232 +23,253 @@ body {
     color: #263238;
     background-color: #eef3f5;
 }
-
-/* Encabezado */
-
 .encabezado {
-    min-height: 96px;
-    padding: 10px 22px;
+    min-height: 55px;
+    padding: 3px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
     background-color: #e5edf2;
-    border-bottom: 4px solid #1788ad;
+    border-bottom: 3px solid #1788ad;
 }
-
 .identidad {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
+    min-width: 0;
 }
-
 .contenedor-logo {
-    width: 250px;
-    height: 95px;
+    width: 145px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
-
 .logo-jira {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
 }
-
 .titulos-visor {
-    max-width: 760px;
+    max-width: 720px;
+    min-width: 0;
 }
-
 .encabezado h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 21px;
+    line-height: 1.1;
 }
-
 .encabezado p {
-    margin: 5px 0 0;
-    max-width: 750px;
+    margin: 1px 0 0;
+    max-width: 720px;
     color: #526873;
-    font-size: 13px;
-    line-height: 1.35;
+    font-size: 12px;
+    line-height: 1.25;
 }
-
 .nombre-sistema {
     color: #176f8f;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
 }
-
-/* Estructura principal */
-
-.contenedor-app {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-}
-
-.panel-lateral {
-    width: 360px;
-    min-width: 360px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(248, 251, 252, 0.97);
-    border-right: 1px solid #c9d5da;
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.14);
-    z-index: 1000;
-}
-
 .panel-titulo {
-    min-height: 54px;
-    padding-left: 22px;
+    min-height: 46px;
+    padding-left: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #526674;
     color: white;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: bold;
 }
-
 #boton-panel {
-    width: 52px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
     border: 0;
     background: transparent;
     color: white;
-    font-size: 31px;
+    font-size: 27px;
     cursor: pointer;
 }
-
 #boton-panel:hover {
     background-color: rgba(255, 255, 255, 0.12);
 }
-
-.panel-contenido {
-    padding: 24px 28px;
-    overflow-y: auto;
-}
-
 .boton-seccion {
     width: 100%;
-    margin-bottom: 14px;
-    padding: 13px;
+    margin-bottom: 9px;
+    padding: 10px;
     border: 0;
     border-radius: 4px;
     background-color: #667782;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 1.15;
     cursor: pointer;
 }
-
 .boton-seccion:hover,
 .boton-seccion.activo {
     background-color: #176f8f;
 }
-
 .tarjeta-filtros {
-    margin: 20px 0;
-    padding: 18px;
+    margin: 12px 0;
+    padding: 13px;
     display: grid;
-    gap: 10px;
+    gap: 7px;
     border: 1px solid #cbd6db;
     border-radius: 6px;
     background-color: white;
 }
-
 .tarjeta-filtros label {
-    margin-top: 5px;
-    font-size: 14px;
+    margin-top: 3px;
+    font-size: 13px;
     font-weight: bold;
 }
-
 .tarjeta-filtros select {
     width: 100%;
-    padding: 10px;
+    min-height: 38px;
+    padding: 7px 9px;
     border: 1px solid #b9c7cd;
     border-radius: 4px;
     background-color: white;
-    font-size: 15px;
+    font-size: 13px;
 }
-
 .boton-consulta {
-    margin-top: 10px;
-    padding: 11px;
+    min-height: 38px;
+    margin-top: 7px;
+    padding: 8px;
     border: 1px solid #176f8f;
     border-radius: 4px;
     background-color: white;
     color: #176f8f;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
 }
-
 .boton-consulta:hover {
     background-color: #176f8f;
     color: white;
 }
-
 .panel-leyenda {
-    margin-top: 22px;
-    padding: 16px;
+    margin-top: 12px;
+    padding: 12px 4px 8px;
     border-top: 1px solid #cbd6db;
 }
-
 .panel-leyenda h2 {
-    margin: 0 0 14px;
-    font-size: 17px;
+    margin: 0 0 9px;
+    font-size: 15px;
 }
-
 .panel-leyenda p {
-    margin: 10px 0;
+    margin: 6px 0;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 14px;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.2;
 }
-
 .simbolo {
-    width: 16px;
-    height: 16px;
+    width: 13px;
+    height: 13px;
     display: inline-block;
+    flex-shrink: 0;
     border: 1px solid #333;
     border-radius: 50%;
 }
-
 .apto {
     background-color: #35a853;
 }
-
 .moderado {
     background-color: #f2c94c;
 }
-
 .no-apto {
     background-color: #d9363e;
 }
-
 .sin-datos {
     background-color: #aeb5b9;
 }
-
-/* Mapa */
-
-.zona-mapa {
-    flex: 1;
-    min-width: 0;
-    position: relative;
+@media (max-width: 1200px) {
+    .encabezado {
+        min-height: 62px;
+        padding: 5px 12px;
+        gap: 10px;
+    }
+    .contenedor-logo {
+        width: 140px;
+        height: 56px;
+    }
+    .identidad {
+        gap: 10px;
+    }
+    .encabezado h1 {
+        font-size: 20px;
+    }
+    .encabezado p {
+        font-size: 11px;
+        line-height: 1.15;
+    }
+    .nombre-sistema {
+        font-size: 19px;
+    }
+    .panel-lateral {
+        width: 280px;
+        min-width: 280px;
+    }
+    .panel-titulo {
+        min-height: 42px;
+        padding-left: 13px;
+        font-size: 16px;
+    }
+    #boton-panel {
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+    }
+    .panel-contenido {
+        padding: 10px 12px;
+    }
+    .boton-seccion {
+        margin-bottom: 7px;
+        padding: 8px;
+        font-size: 13px;
+    }
+    .tarjeta-filtros {
+        margin: 9px 0;
+        padding: 10px;
+        gap: 5px;
+    }
+    .tarjeta-filtros label {
+        font-size: 12px;
+    }
+    .tarjeta-filtros select,
+    .boton-consulta {
+        min-height: 34px;
+        font-size: 12px;
+    }
+    .panel-leyenda {
+        margin-top: 9px;
+        padding-top: 9px;
+    }
+    .panel-leyenda h2 {
+        margin-bottom: 7px;
+        font-size: 14px;
+    }
+    .panel-leyenda p {
+        margin: 4px 0;
+        gap: 7px;
+        font-size: 11px;
+    }
+    .simbolo {
+        width: 11px;
+        height: 11px;
+    }
 }
-
 #map {
     width: 100%;
     height: 100%;
 }
-
-/* Pie */
-
 .pie {
     min-height: 28px;
     padding: 6px 18px;
@@ -250,44 +277,32 @@ body {
     color: white;
     font-size: 12px;
 }
-
-/* Pantallas pequeñas */
-
 @media (max-width: 850px) {
     .nombre-sistema {
         display: none;
     }
-
     .panel-lateral {
         width: 300px;
         min-width: 300px;
     }
-
     .encabezado h1 {
         font-size: 19px;
     }
 }
-/* ==========================================
-   POPUP DE SITIOS
-========================================== */
-
 .popup-sitio {
     min-width: 270px;
     line-height: 1.35;
 }
-
 .popup-sitio h3 {
     margin: 0 0 12px;
     font-size: 24px;
     color: #2d2d2d;
 }
-
 .popup-sitio hr {
     margin: 12px 0;
     border: 0;
     border-top: 1px solid #d5d5d5;
 }
-
 .popup-linea {
     display: grid;
     grid-template-columns: 110px 1fr;
@@ -295,19 +310,13 @@ body {
     margin: 5px 0;
     align-items: start;
 }
-
 .popup-etiqueta {
     font-weight: 700;
     color: #2f2f2f;
 }
-
 .popup-linea span:last-child {
     color: #4a4a4a;
 }
-/* ==========================================
-   SIMBOLOGÍA DINÁMICA
-========================================== */
-
 .leyenda-contexto {
     margin: 0 0 14px;
     padding: 9px 10px;
@@ -317,7 +326,6 @@ body {
     font-size: 13px;
     line-height: 1.35;
 }
-
 .leyenda-periodo {
     margin-top: 14px !important;
     padding-top: 10px;
@@ -326,119 +334,6 @@ body {
     font-size: 13px !important;
     font-style: italic;
 }
-/* ==========================================
-   VENTANA DE GRÁFICAS
-========================================== */
-
-.oculto {
-    display: none !important;
-}
-
-.modal-grafica {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    background-color: rgba(21, 35, 42, 0.55);
-}
-
-.ventana-grafica {
-    width: min(920px, 95vw);
-    height: min(620px, 88vh);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-}
-
-.encabezado-grafica {
-    padding: 16px 20px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-    border-bottom: 1px solid #d4dde1;
-    background-color: #eef4f6;
-}
-
-.encabezado-grafica h2 {
-    margin: 0;
-    font-size: 21px;
-    color: #263238;
-}
-
-.encabezado-grafica p {
-    margin: 5px 0 0;
-    color: #60717a;
-    font-size: 14px;
-}
-
-#cerrar-grafica {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    border: 0;
-    border-radius: 4px;
-    background: transparent;
-    color: #526674;
-    font-size: 30px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-#cerrar-grafica:hover {
-    background-color: #dce7eb;
-}
-
-.contenedor-grafica {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    padding: 24px;
-
-}
-    .informacion-grafica {
-    flex: 1;
-    min-width: 0;
-}
-
-.contenedor-grafica canvas {
-    width: 100% !important;
-    height: 100% !important;
-
-}
-
-.selector-parametro-grafica {
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.selector-parametro-grafica label {
-    color: #35515d;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.selector-parametro-grafica select {
-    min-width: 250px;
-    padding: 7px 9px;
-    border: 1px solid #b9c7cd;
-    border-radius: 4px;
-    background-color: white;
-    color: #263238;
-    font-size: 14px;
-}
-/* ==========================================
-   TABLA DE PARÁMETROS FISICOQUÍMICOS
-========================================== */
-
 .tabla-fisicoquimica {
     margin-top: 20px;
     padding: 16px;
@@ -446,20 +341,17 @@ body {
     border-radius: 6px;
     background-color: white;
 }
-
 .tabla-fisicoquimica h2 {
     margin: 0 0 8px;
     color: #263238;
     font-size: 17px;
 }
-
 .fisicoquimico-contexto {
     margin: 0 0 14px;
     color: #60717a;
     font-size: 13px;
     line-height: 1.35;
 }
-
 .fisicoquimico-sitio {
     margin-bottom: 14px;
     padding: 10px;
@@ -469,23 +361,19 @@ body {
     border-left: 4px solid #176f8f;
     background-color: #edf5f8;
 }
-
 .fisicoquimico-sitio strong {
     color: #263238;
     font-size: 15px;
 }
-
 .fisicoquimico-sitio span {
     color: #60717a;
     font-size: 13px;
 }
-
 .tabla-fisicoquimica table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
 }
-
 .tabla-fisicoquimica th,
 .tabla-fisicoquimica td {
     padding: 8px 6px;
@@ -493,30 +381,19 @@ body {
     text-align: left;
     vertical-align: top;
 }
-
 .tabla-fisicoquimica th {
     color: #35515d;
     font-size: 12px;
     text-transform: uppercase;
 }
-
 .tabla-fisicoquimica th:last-child,
 .tabla-fisicoquimica td:last-child {
     text-align: right;
     font-weight: 600;
 }
-
 .tabla-fisicoquimica tbody tr:last-child td {
     border-bottom: 0;
 }
-/* ==========================================
-   VENTANA DE GRÁFICAS
-========================================== */
-
-.oculto {
-    display: none !important;
-}
-
 .modal-grafica {
     position: fixed;
     inset: 0;
@@ -527,7 +404,6 @@ body {
     padding: 24px;
     background-color: rgba(21, 35, 42, 0.55);
 }
-
 .ventana-grafica {
     width: min(1100px, 95vw);
     height: min(680px, 90vh);
@@ -538,7 +414,6 @@ body {
     background-color: white;
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
 }
-
 .encabezado-grafica {
     flex-shrink: 0;
     padding: 16px 20px;
@@ -549,24 +424,20 @@ body {
     border-bottom: 1px solid #d4dde1;
     background-color: #eef4f6;
 }
-
 .informacion-grafica {
     flex: 1;
     min-width: 0;
 }
-
 .encabezado-grafica h2 {
     margin: 0;
     color: #263238;
     font-size: 24px;
 }
-
 .encabezado-grafica p {
     margin: 5px 0 0;
     color: #60717a;
     font-size: 15px;
 }
-
 #cerrar-grafica {
     width: 38px;
     height: 38px;
@@ -579,11 +450,9 @@ body {
     line-height: 1;
     cursor: pointer;
 }
-
 #cerrar-grafica:hover {
     background-color: #dce7eb;
 }
-
 .contenedor-grafica {
     position: relative;
     flex: 1;
@@ -591,30 +460,21 @@ body {
     padding: 24px 28px;
     background-color: white;
 }
-
 .contenedor-grafica canvas {
     width: 100% !important;
     height: 100% !important;
 }
-
-
-/* ==========================================
-   SELECTOR DE PARÁMETRO
-========================================== */
-
 .selector-parametro-grafica {
     margin-top: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 .selector-parametro-grafica label {
     color: #35515d;
     font-size: 14px;
     font-weight: bold;
 }
-
 .selector-parametro-grafica select {
     min-width: 250px;
     padding: 7px 9px;
@@ -624,10 +484,6 @@ body {
     color: #263238;
     font-size: 14px;
 }
-/* ==========================================
-   REPORTE ANUAL POR SITIO
-========================================== */
-
 .modal-reporte {
     position: fixed;
     inset: 0;
@@ -638,7 +494,6 @@ body {
     padding: 24px;
     background-color: rgba(21, 35, 42, 0.58);
 }
-
 .ventana-reporte {
     width: min(1050px, 96vw);
     max-height: 92vh;
@@ -649,55 +504,23 @@ body {
     background-color: white;
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
 }
-
-.encabezado-reporte {
-    padding: 16px 20px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-    border-bottom: 1px solid #d4dde1;
-    background-color: #eef4f6;
-}
-
 .encabezado-reporte h2 {
     margin: 0;
     color: #263238;
     font-size: 23px;
 }
-
 .encabezado-reporte p {
     margin: 5px 0 0;
     color: #60717a;
     font-size: 14px;
 }
-
-#cerrar-reporte {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    border: 0;
-    border-radius: 4px;
-    background: transparent;
-    color: #526674;
-    font-size: 30px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-#cerrar-reporte:hover {
-    background-color: #dce7eb;
-}
-
 .contenido-reporte {
     padding: 22px;
     overflow-y: auto;
 }
-
 .reporte-seccion {
     margin-bottom: 24px;
 }
-
 .reporte-seccion h3 {
     margin: 0 0 12px;
     padding-bottom: 7px;
@@ -705,14 +528,11 @@ body {
     color: #263238;
     font-size: 17px;
 }
-
 .reporte-ficha {
     display: grid;
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
 }
-
 .reporte-ficha div {
     padding: 10px;
     display: flex;
@@ -722,25 +542,20 @@ body {
     border-radius: 5px;
     background-color: #f8fafb;
 }
-
 .reporte-ficha strong {
     color: #526873;
     font-size: 12px;
     text-transform: uppercase;
 }
-
 .reporte-ficha span {
     color: #263238;
     font-size: 14px;
 }
-
 .reporte-indicadores {
     display: grid;
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
 }
-
 .reporte-indicadores div {
     padding: 15px;
     display: flex;
@@ -752,67 +567,55 @@ body {
     background-color: #edf5f8;
     text-align: center;
 }
-
 .reporte-indicadores strong {
     color: #176f8f;
     font-size: 25px;
 }
-
 .reporte-indicadores span {
     color: #526873;
     font-size: 13px;
 }
-
 .reporte-extremos {
     margin-top: 14px;
     padding: 12px 14px;
     border-left: 4px solid #176f8f;
     background-color: #f3f7f9;
 }
-
 .reporte-extremos p {
     margin: 5px 0;
     font-size: 14px;
 }
-
 .reporte-tabla-contenedor {
     overflow-x: auto;
 }
-
 .reporte-tabla {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
 }
-
 .reporte-tabla th,
 .reporte-tabla td {
     padding: 9px 8px;
     border: 1px solid #d7e0e4;
     text-align: left;
 }
-
 .reporte-tabla th {
     background-color: #526674;
     color: white;
 }
-
 .reporte-tabla th small {
     display: block;
     margin-top: 2px;
     font-size: 10px;
     font-weight: normal;
 }
-
 .reporte-tabla tbody tr:nth-child(even) {
     background-color: #f6f9fa;
 }
-
 .reporte-tabla .fila-sin-datos {
     color: #7b878d;
     background-color: #f0f2f3;
 }
-
 .reporte-nota {
     margin: 0;
     padding: 12px;
@@ -822,17 +625,6 @@ body {
     font-size: 12px;
     line-height: 1.45;
 }
-
-@media (max-width: 700px) {
-    .reporte-ficha,
-    .reporte-indicadores {
-        grid-template-columns: 1fr;
-    }
-}
-/* ==========================================
-   GRÁFICAS Y TABLA FISICOQUÍMICA DEL REPORTE
-========================================== */
-
 .reporte-grafica {
     position: relative;
     width: 100%;
@@ -842,25 +634,21 @@ body {
     border-radius: 6px;
     background-color: white;
 }
-
 .reporte-grafica canvas {
     width: 100% !important;
     height: 100% !important;
 }
-
 .reporte-selector-parametro {
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 .reporte-selector-parametro label {
     color: #35515d;
     font-size: 14px;
     font-weight: bold;
 }
-
 .reporte-selector-parametro select {
     min-width: 260px;
     padding: 8px 10px;
@@ -870,42 +658,35 @@ body {
     color: #263238;
     font-size: 14px;
 }
-
 .reporte-tabla-fisicoquimica {
     min-width: 850px;
 }
-
 .indicador-monitoreos {
     border-top: 4px solid #1788ad !important;
 }
-
 .indicador-apto {
     border-top: 4px solid #35a853 !important;
 }
-
 .indicador-no-apto {
     border-top: 4px solid #d9363e !important;
 }
-
 @media (max-width: 700px) {
+    .reporte-ficha,
+    .reporte-indicadores {
+        grid-template-columns: 1fr;
+    }
     .reporte-grafica {
         height: 300px;
     }
-
     .reporte-selector-parametro {
         align-items: stretch;
         flex-direction: column;
     }
-
     .reporte-selector-parametro select {
         width: 100%;
         min-width: 0;
     }
 }
-/* ==========================================
-   ENCABEZADO INSTITUCIONAL DEL REPORTE
-========================================== */
-
 .encabezado-reporte {
     padding: 18px 22px;
     display: flex;
@@ -915,7 +696,6 @@ body {
     border-bottom: 3px solid #1788ad;
     background-color: #f7fafb;
 }
-
 .encabezado-reporte-principal {
     flex: 1;
     min-width: 0;
@@ -923,19 +703,16 @@ body {
     align-items: flex-start;
     gap: 22px;
 }
-
 .logo-reporte {
     width: 200px;
     height: auto;
     flex-shrink: 0;
     object-fit: contain;
 }
-
 .identidad-reporte {
     flex: 1;
     min-width: 0;
 }
-
 .institucion-reporte {
     margin: 0 0 7px;
     max-width: 760px;
@@ -944,49 +721,41 @@ body {
     font-weight: 600;
     line-height: 1.35;
 }
-
 .identidad-reporte h2 {
     margin: 0;
     color: #263238;
     font-size: 25px;
     line-height: 1.2;
 }
-
 .datos-principales-reporte {
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px 26px;
 }
-
 .datos-principales-reporte p {
     margin: 0;
     color: #526873;
     font-size: 15px;
 }
-
 .datos-principales-reporte strong {
     color: #263238;
 }
-
 .datos-principales-reporte span {
     color: #176f8f;
     font-weight: 700;
 }
-
 .fecha-reporte {
     margin: 8px 0 0;
     color: #77878e;
     font-size: 11px;
 }
-
 .acciones-reporte {
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
     gap: 8px;
 }
-
 #imprimir-reporte {
     padding: 9px 14px;
     border: 1px solid #176f8f;
@@ -997,12 +766,10 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
-
 #imprimir-reporte:hover {
     background-color: #176f8f;
     color: white;
 }
-
 #cerrar-reporte {
     width: 38px;
     height: 38px;
@@ -1015,191 +782,43 @@ body {
     line-height: 1;
     cursor: pointer;
 }
-
 #cerrar-reporte:hover {
     background-color: #e2eaed;
 }
-
 @media (max-width: 760px) {
-
     .encabezado-reporte {
         flex-direction: column;
     }
-
     .encabezado-reporte-principal {
         width: 100%;
     }
-
     .logo-reporte {
         width: 130px;
         height: auto;
     }
-
     .identidad-reporte h2 {
         font-size: 21px;
     }
-
     .acciones-reporte {
         width: 100%;
         justify-content: flex-end;
     }
 }
-
-
-/* ==========================================
-   ESTILOS DE IMPRESIÓN
-========================================== */
-
-@media print {
-
-    body {
-        display: block;
-        overflow: visible;
-        background: white;
-    }
-
-    .encabezado,
-    .contenedor-app,
-    .pie,
-    .modal-grafica,
-    #cerrar-reporte,
-    #imprimir-reporte {
-        display: none !important;
-    }
-
-    .modal-reporte {
-        position: static;
-        inset: auto;
-        display: block !important;
-        padding: 0;
-        background: white;
-    }
-
-    .ventana-reporte {
-        width: 100%;
-        max-height: none;
-        overflow: visible;
-        border-radius: 0;
-        box-shadow: none;
-    }
-
-    .encabezado-reporte {
-        padding: 0 0 14px;
-        border-bottom: 2px solid #176f8f;
-        background: white;
-    }
-
-    .contenido-reporte {
-        padding: 16px 0 0;
-        overflow: visible;
-    }
-
-.reporte-grafica {
-    height: 320px;
-    break-inside: avoid;
-    page-break-inside: avoid;
-}
-
-/* ==========================================
-   PAGINACIÓN DEL REPORTE ANUAL GENERAL
-========================================== */
-
-#modal-reporte-general .reporte-seccion {
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-    margin-bottom: 14px;
-}
-
-#modal-reporte-general .reporte-tabla-contenedor {
-    display: block;
-    overflow: visible !important;
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-}
-
-#modal-reporte-general .reporte-tabla thead {
-    display: table-header-group;
-}
-
-#modal-reporte-general .reporte-tabla tfoot {
-    display: table-footer-group;
-}
-
-#modal-reporte-general .reporte-tabla tr {
-    break-inside: avoid;
-    page-break-inside: avoid;
-}
-
-#modal-reporte-general .reporte-seccion h3 {
-    break-after: avoid;
-    page-break-after: avoid;
-}
-
-#modal-reporte-general .reporte-tabla {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-    /* ===== TABLAS ===== */
-
-    .reporte-tabla-contenedor {
-        overflow: visible !important;
-    }
-
-    .reporte-tabla {
-        width: 100%;
-        font-size: 10px;
-        border-collapse: collapse;
-        table-layout: fixed;
-    }
-
-    .reporte-tabla th,
-    .reporte-tabla td {
-        padding: 5px 4px;
-        white-space: normal;
-        word-break: break-word;
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    .reporte-tabla th:first-child,
-    .reporte-tabla td:first-child {
-        text-align: left;
-    }
-
-    .reporte-selector-parametro {
-        display: none !important;
-    }
-
-    @page {
-        size: A4 landscape;
-        margin: 12mm;
-    }
-}
-/* ==========================================
-   REPORTE ANUAL GENERAL
-========================================== */
-
 .reporte-indicadores-generales {
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
 }
-
 .reporte-tabla-general {
     min-width: 1050px;
 }
-
 .reporte-tabla-periodos {
     min-width: 850px;
 }
-
 .reporte-tabla-general th,
 .reporte-tabla-general td,
 .reporte-tabla-periodos th,
 .reporte-tabla-periodos td {
     text-align: center;
 }
-
 .reporte-tabla-general th:first-child,
 .reporte-tabla-general td:first-child,
 .reporte-tabla-general th:nth-child(2),
@@ -1208,42 +827,58 @@ body {
 .reporte-tabla-periodos td:first-child {
     text-align: left;
 }
-
 .celda-apta {
     background-color: #e5f4e9;
     color: #226c36;
     font-weight: 600;
 }
-
 .celda-no-apta {
     background-color: #fbe6e7;
     color: #9a252b;
     font-weight: 600;
 }
-
 @media (max-width: 900px) {
-
     .reporte-indicadores-generales {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
-
-
-/* Ajustes del reporte general al imprimir */
-
-/* ==========================================
-   ESTILOS DE IMPRESIÓN
-========================================== */
-
 @media print {
-
+    .encabezado,
+    .contenedor-app,
+    .pie,
+    .modal-grafica,
+    #cerrar-reporte,
+    #imprimir-reporte {
+        display: none !important;
+    }
+    .modal-reporte {
+        position: static;
+        inset: auto;
+        display: block !important;
+        padding: 0;
+        background: white;
+    }
+    .ventana-reporte {
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .encabezado-reporte {
+        padding: 0 0 14px;
+        border-bottom: 2px solid #176f8f;
+        background: white;
+    }
+    .contenido-reporte {
+        padding: 16px 0 0;
+        overflow: visible;
+    }
     body {
         display: block;
         overflow: visible;
         background: white;
     }
-
     .encabezado,
     .contenedor-app,
     .pie,
@@ -1254,19 +889,9 @@ body {
     #imprimir-reporte-general {
         display: none !important;
     }
-
-    /*
-       Ocultar siempre los reportes que
-       conservan la clase "oculto".
-    */
     .modal-reporte.oculto {
         display: none !important;
     }
-
-    /*
-       Mostrar solamente el reporte
-       que se encuentra abierto.
-    */
     .modal-reporte:not(.oculto) {
         position: static;
         inset: auto;
@@ -1275,7 +900,6 @@ body {
         padding: 0;
         background: white;
     }
-
     .modal-reporte:not(.oculto) .ventana-reporte {
         width: 100%;
         max-width: none;
@@ -1285,35 +909,29 @@ body {
         border-radius: 0;
         box-shadow: none;
     }
-
     .modal-reporte:not(.oculto) .encabezado-reporte {
         padding: 0 0 14px;
         border-bottom: 2px solid #176f8f;
         background: white;
     }
-
     .modal-reporte:not(.oculto) .contenido-reporte {
         padding: 16px 0 0;
         overflow: visible;
     }
-
     .reporte-seccion {
         break-inside: avoid;
         page-break-inside: avoid;
     }
-
     .reporte-grafica {
         height: 320px;
         break-inside: avoid;
         page-break-inside: avoid;
     }
-
     .reporte-tabla-contenedor {
         width: 100%;
         max-width: 100%;
         overflow: visible !important;
     }
-
     .reporte-tabla {
         width: 100% !important;
         min-width: 0 !important;
@@ -1321,7 +939,6 @@ body {
         table-layout: fixed;
         font-size: 9px;
     }
-
     .reporte-tabla th,
     .reporte-tabla td {
         padding: 4px 3px;
@@ -1331,12 +948,10 @@ body {
         text-align: center;
         vertical-align: middle;
     }
-
     .reporte-tabla th:first-child,
     .reporte-tabla td:first-child {
         text-align: left;
     }
-
     .reporte-tabla-general,
     .reporte-tabla-periodos,
     .reporte-tabla-fisicoquimica {
@@ -1344,109 +959,495 @@ body {
         min-width: 0 !important;
         table-layout: fixed;
     }
-
     .reporte-tabla-general {
         font-size: 7.5px;
     }
-
     .reporte-tabla-general th,
     .reporte-tabla-general td {
         padding: 3px 2px;
     }
-
     .reporte-tabla-periodos {
         font-size: 8.5px;
     }
-
     .reporte-selector-parametro {
         display: none !important;
     }
-
     .reporte-indicadores-generales {
-        grid-template-columns:
-            repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
     }
-/* ==========================================
-   PAGINACIÓN DEL REPORTE ANUAL GENERAL
-========================================== */
-
-/* Las secciones generales sí pueden continuar
-   en varias páginas */
-#modal-reporte-general .reporte-seccion {
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-}
-
-/* Las tablas largas deben poder dividirse */
-#modal-reporte-general .reporte-tabla-contenedor {
-    display: block;
-    overflow: visible !important;
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-}
-
-/* Repetir el encabezado de la tabla
-   en cada página */
-#modal-reporte-general .reporte-tabla thead {
-    display: table-header-group;
-}
-
-/* Mantener el pie al final, cuando exista */
-#modal-reporte-general .reporte-tabla tfoot {
-    display: table-footer-group;
-}
-
-/* Evitar que una misma fila se corte
-   entre dos páginas */
-#modal-reporte-general .reporte-tabla tr {
-    break-inside: avoid;
-    page-break-inside: avoid;
-}
-
-/* El título debe permanecer junto
-   con el inicio de la tabla */
-#modal-reporte-general .reporte-seccion h3 {
-    break-after: avoid;
-    page-break-after: avoid;
-}
-
-/* Evitar espacios adicionales que puedan
-   provocar una página vacía */
-#modal-reporte-general .reporte-seccion {
-    margin-bottom: 14px;
-}
-
-#modal-reporte-general .reporte-tabla {
-    margin-top: 0;
-    margin-bottom: 0;
-}
+    #modal-reporte-general .reporte-tabla-contenedor {
+        display: block;
+        overflow: visible !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+    #modal-reporte-general .reporte-tabla thead {
+        display: table-header-group;
+    }
+    #modal-reporte-general .reporte-tabla tfoot {
+        display: table-footer-group;
+    }
+    #modal-reporte-general .reporte-tabla tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    #modal-reporte-general .reporte-seccion h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+    #modal-reporte-general .reporte-seccion {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+        margin-bottom: 14px;
+    }
+    #modal-reporte-general .reporte-tabla {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     @page {
         size: A4 landscape;
         margin: 12mm;
     }
 }
-/* ==========================================
-   AJUSTE DE ANCHO DEL REPORTE GENERAL
-========================================== */
-
 #modal-reporte-general .ventana-reporte {
     width: min(1250px, calc(100vw - 32px));
     max-width: calc(100vw - 32px);
     min-width: 0;
 }
-
 #modal-reporte-general .contenido-reporte {
     min-width: 0;
     overflow-x: hidden;
 }
-
 #modal-reporte-general .reporte-tabla-contenedor {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
 }
-/* Quitar el recuadro de enfoque al hacer clic
-   sobre las subcuencas de Leaflet */
 .leaflet-interactive:focus {
     outline: none;
+}
+.controles-flotantes-mapa {
+    position: absolute;
+    top: 105px;
+    right: 14px;
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.boton-mapa-flotante {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #d8dfe3;
+    border-radius: 7px;
+    background-color: white;
+    color: #7a858b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    transition: background-color 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+.boton-mapa-flotante:hover {
+    background-color: #eef4f6;
+    color: #176f8f;
+    border-color: #8fb4c2;
+    transform: translateY(-1px);
+}
+.icono-capas-svg {
+    width: 28px;
+    height: 28px;
+    overflow: visible;
+}
+.icono-capas-svg path {
+    fill: #d9dde0;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.boton-mapa-flotante.activo {
+    background-color: #176f8f;
+    color: white;
+    border-color: #176f8f;
+}
+.boton-mapa-flotante.activo .icono-capas-svg path {
+    fill: rgba(255, 255, 255, 0.24);
+}
+.panel-mapa-flotante {
+    position: absolute;
+    top: 74px;
+    right: 62px;
+    z-index: 1190;
+    width: 230px;
+    overflow: hidden;
+    border: 1px solid #bcc9cf;
+    border-radius: 7px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.20);
+}
+.panel-mapa-encabezado {
+    min-height: 44px;
+    padding: 8px 10px 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #526674;
+    color: white;
+    font-size: 14px;
+}
+.panel-mapa-encabezado button {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: transparent;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+.panel-mapa-contenido {
+    padding: 12px 14px;
+    display: grid;
+    gap: 10px;
+}
+.panel-mapa-contenido label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #33434b;
+    font-size: 13px;
+    cursor: pointer;
+}
+.panel-mapa-contenido input {
+    width: 16px;
+    height: 16px;
+}
+.oculto {
+    display: none !important;
+}
+.leaflet-control-layers {
+    display: none;
+}
+.contenedor-app {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+.panel-lateral {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #c9d5da;
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 12px;
+    z-index: 1200;
+    width: 340px;
+    min-width: 340px;
+    overflow: hidden;
+    border: 1px solid #b8c6cc;
+    border-radius: 8px;
+    background-color: rgba(248, 251, 252, 0.98);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.24);
+    transition: width 0.24s ease,
+        min-width 0.24s ease,
+        opacity 0.18s ease;
+}
+.contenedor-mapa {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+}
+.barra-panel-contraido {
+    display: none;
+}
+.panel-lateral.contraido {
+    top: 24px;
+    bottom: auto;
+    left: 20px;
+    width: 48px !important;
+    min-width: 48px !important;
+    overflow: visible;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: none;
+}
+.panel-lateral.contraido .panel-titulo,
+.panel-lateral.contraido .panel-contenido,
+.panel-lateral.contraido .panel-leyenda {
+    display: none !important;
+}
+.panel-lateral.contraido .barra-panel-contraido {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #aebdc4;
+    border-radius: 7px;
+    background-color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+.boton-barra-panel {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-bottom: 1px solid #d6dfe3;
+    background-color: white;
+    color: #526674;
+    cursor: pointer;
+    transition: background-color 0.18s ease,
+        color 0.18s ease;
+}
+.boton-barra-panel:last-child {
+    border-bottom: 0;
+}
+.boton-barra-panel:hover {
+    background-color: #eaf3f6;
+    color: #176f8f;
+}
+.boton-barra-panel svg {
+    width: 27px;
+    height: 27px;
+    overflow: visible;
+}
+.boton-barra-panel svg path,
+.boton-barra-panel svg circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.boton-abrir-panel svg {
+    width: 23px;
+    height: 23px;
+}
+.panel-contenido {
+    padding: 14px 16px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+.leaflet-top.leaflet-right .leaflet-control-zoom {
+    margin-top: 14px;
+    margin-right: 14px;
+}
+.leaflet-control-scale {
+    transition: margin-left 0.25s ease;
+}
+body.panel-abierto .leaflet-control-scale {
+    margin-left: 360px !important;
+}
+.panel-lateral.modo-bacteriologico
+#boton-fisicoquimicos {
+    display: none;
+}
+.panel-lateral.modo-fisicoquimico
+#boton-bacteriologico {
+    display: none;
+}
+.zona-mapa {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+.icono-leyenda-svg {
+    width: 28px;
+    height: 28px;
+    overflow: visible;
+}
+.icono-leyenda-svg circle,
+.icono-leyenda-svg line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+#boton-leyenda-flotante {
+    display: none;
+}
+.panel-simbologia-contenido {
+    padding: 14px 18px;
+}
+.panel-simbologia-contenido p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 15px;
+}
+/* ==========================================
+   BUSCADOR DE SITIOS
+========================================== */
+
+.buscador-sitios {
+    margin: 10px 0 12px;
+    padding: 11px 12px;
+
+    border: 1px solid #cbd6db;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.buscador-sitios label {
+    display: block;
+    margin-bottom: 6px;
+
+    color: #33434b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.buscador-sitios-fila {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+}
+
+#buscar-sitio {
+    width: 100%;
+    min-width: 0;
+    min-height: 36px;
+    padding: 7px 9px;
+
+    border: 1px solid #b9c7cd;
+    border-radius: 4px;
+    background-color: white;
+
+    color: #263238;
+    font-size: 13px;
+}
+
+#buscar-sitio:focus {
+    border-color: #1788ad;
+    outline: 2px solid rgba(23, 136, 173, 0.16);
+}
+
+#boton-buscar-sitio {
+    width: 38px;
+    min-width: 38px;
+    min-height: 36px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #176f8f;
+    border-radius: 4px;
+    background-color: white;
+    color: #176f8f;
+
+    cursor: pointer;
+}
+
+#boton-buscar-sitio:hover {
+    background-color: #176f8f;
+    color: white;
+}
+
+#boton-buscar-sitio svg {
+    width: 19px;
+    height: 19px;
+}
+
+#boton-buscar-sitio circle,
+#boton-buscar-sitio line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.mensaje-buscador-sitios {
+    min-height: 15px;
+    margin: 5px 0 0;
+
+    color: #60717a;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.mensaje-buscador-sitios.error {
+    color: #a42d33;
+}
+/* ==========================================
+   RESULTADOS DEL BUSCADOR DE SITIOS
+========================================== */
+
+.buscador-sitios {
+    position: relative;
+}
+
+.resultados-buscador-sitios {
+    position: absolute;
+    top: calc(100% - 18px);
+    left: 12px;
+    right: 12px;
+    z-index: 1800;
+
+    max-height: 230px;
+    overflow-y: auto;
+
+    border: 1px solid #b9c7cd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.resultado-sitio {
+    width: 100%;
+    padding: 9px 11px;
+
+    display: block;
+
+    border: 0;
+    border-bottom: 1px solid #e2e8eb;
+    background-color: white;
+
+    color: #33434b;
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.resultado-sitio:last-child {
+    border-bottom: 0;
+}
+
+.resultado-sitio:hover,
+.resultado-sitio.activo {
+    background-color: #eaf3f6;
+    color: #176f8f;
+}
+
+.resultados-buscador-sitios::-webkit-scrollbar {
+    width: 8px;
+}
+
+.resultados-buscador-sitios::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #aebbc1;
+}
+
+.resultados-buscador-sitios::-webkit-scrollbar-track {
+    background-color: #eef3f5;
+}
+.texto-encontrado {
+    color: #176f8f;
+    font-weight: 700;
 }

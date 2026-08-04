@@ -37,7 +37,7 @@ fetch('data/geojson/Subcuencas.geojson')
         return response.json();
     })
     .then(datos => {
-        const capaSubcuencas = L.geoJSON(
+        window.capaSubcuencas = L.geoJSON(
             datos,
             {
                 pane: 'subcuencasPane',
@@ -87,7 +87,7 @@ fetch('data/geojson/Subcuencas.geojson')
                         mouseout: function (
                             evento
                         ) {
-                            capaSubcuencas.resetStyle(
+                            window.capaSubcuencas.resetStyle(
                                 evento.target
                             );
 
@@ -108,7 +108,7 @@ fetch('data/geojson/Subcuencas.geojson')
         // Agregar las subcuencas
         // al control de capas
         controlCapas.addOverlay(
-            capaSubcuencas,
+            window.capaSubcuencas,
             'Subcuencas'
         );
 
@@ -116,7 +116,7 @@ fetch('data/geojson/Subcuencas.geojson')
         // Ajustar el mapa para mostrar
         // todas las subcuencas
         map.fitBounds(
-            capaSubcuencas.getBounds()
+            window.capaSubcuencas.getBounds()
         );
     })
     .catch(error => {
