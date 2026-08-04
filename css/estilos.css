@@ -1543,34 +1543,45 @@ body.panel-abierto .leaflet-control-scale {
     background-color: #f7fafb;
 }
 
+/* Íconos de los módulos dentro del tour */
+
 .tour-icono-gota {
-    width: 39px;
-    height: 39px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
     flex-shrink: 0;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 50%;
+    overflow: hidden;
 
-    background-color: #e7f2f6;
+    border: 1px solid #cbd9de;
+    border-radius: 7px;
+
+    background-color: #eef6f8;
     color: #176f8f;
 }
 
 .tour-icono-gota svg {
-    width: 26px;
-    height: 26px;
+    width: 27px !important;
+    height: 27px !important;
+    max-width: 27px !important;
+    max-height: 27px !important;
+
+    display: block;
     overflow: visible;
 }
 
-.tour-icono-gota path,
-.tour-icono-gota circle {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
+.tour-icono-gota svg path,
+.tour-icono-gota svg circle {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.8 !important;
     stroke-linecap: round;
     stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
 }
 
 .tour-modulo-texto {
