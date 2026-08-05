@@ -325,7 +325,7 @@ document.addEventListener(
                                 '¡Todo listo!',
 
                             description:
-                                'Ya puedes comenzar a explorar la información histórica de calidad del agua del territorio la JIRA.',
+                                'Ya puedes comenzar a explorar la información histórica de calidad del agua en el territorio de la JIRA.',
 
                             side: 'over',
                             align: 'center'
