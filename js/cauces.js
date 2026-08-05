@@ -86,6 +86,7 @@ fetch('data/geojson/Cauces_monitoreados.geojson')
         capaCauces,
         'Cauces monitoreados'
     );
+    window.capaCauces = capaCauces;
 
 })
 .catch(error=>{

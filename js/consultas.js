@@ -415,13 +415,13 @@ if (leyendaPeriodo) {
         const color =
             obtenerColorResultado(registro);
 
-        layer.setStyle({
-            radius: 4.5,
-            color: '#ffffff',
-            weight: 1,
-            fillColor: color,
-            fillOpacity: 0.95
-        });
+       layer.setStyle({
+    radius: 4.5,
+    color: '#ffffff',
+    weight: 1,
+    fillColor: color,
+    fillOpacity: 0.95
+});
 
         layer.bindPopup(
             crearPopupResultado(

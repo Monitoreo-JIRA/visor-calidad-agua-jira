@@ -158,6 +158,83 @@
     ></p>
 
 </section>
+<!-- =====================================
+     BÚSQUEDA POR UBICACIÓN
+====================================== -->
+
+<section class="buscador-ubicacion">
+
+    <button
+        id="boton-mostrar-ubicacion"
+        class="boton-mostrar-ubicacion"
+        type="button"
+        aria-expanded="false"
+        aria-controls="contenido-buscador-ubicacion"
+    >
+        <span>Buscar por municipio y localidad</span>
+        <span
+            class="flecha-buscador-ubicacion"
+            aria-hidden="true"
+        >
+            ▾
+        </span>
+    </button>
+
+    <div
+        id="contenido-buscador-ubicacion"
+        class="contenido-buscador-ubicacion oculto"
+    >
+
+        <label for="filtro-municipio-sitios">
+            Municipio
+        </label>
+
+        <select id="filtro-municipio-sitios">
+            <option value="">
+                Seleccionar municipio...
+            </option>
+        </select>
+
+
+        <label for="filtro-localidad-sitios">
+            Localidad
+        </label>
+
+        <select
+            id="filtro-localidad-sitios"
+            disabled
+        >
+            <option value="">
+                Selecciona primero un municipio
+            </option>
+        </select>
+
+
+        <div class="encabezado-sitios-ubicacion">
+
+            <strong>
+                Sitios encontrados
+            </strong>
+
+            <span id="contador-sitios-ubicacion">
+                0
+            </span>
+
+        </div>
+
+
+        <div
+            id="lista-sitios-ubicacion"
+            class="lista-sitios-ubicacion"
+        >
+            <p class="mensaje-sitios-ubicacion">
+                Selecciona un municipio para mostrar sus sitios.
+            </p>
+        </div>
+
+    </div>
+
+</section>
      <section class="tarjeta-filtros">
       <label for="filtro-anio">
        A&ntilde;o de consulta
@@ -548,46 +625,35 @@
   <!--
     LIBRERÍAS Y ARCHIVOS DEL VISOR
 -->
-  <script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-  </script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation">
-  </script>
-  <!-- Driver.js para el recorrido interactivo -->
-<script
-    src="https://cdn.jsdelivr.net/npm/driver.js@latest/dist/driver.js.iife.js"
+ <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
 ></script>
-  <script src="js/mapa.js">
-  </script>
-  <script src="js/capas.js">
-  </script>
-  <script src="js/subcuencas.js">
-  </script>
-  <script src="js/cauces.js">
-  </script>
-  <script src="js/datos.js">
-  </script>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/driver.js@latest/dist/driver.js.iife.js"></script>
+
+<script src="js/mapa.js"></script>
+<script src="js/capas.js"></script>
+<script src="js/subcuencas.js"></script>
+<script src="js/cauces.js"></script>
+<script src="js/datos.js"></script>
 <script src="js/sitios.js"></script>
-<script src="js/buscador_sitios.js"></script>
+<script src="js/buscador_sitios.js?v=5"></script>
 <script src="js/controles_mapa.js"></script>
-  </script>
-  <script src="js/modulos.js">
-  </script>
-  <script src="js/fisicoquimicos.js">
-  </script>
-  <script src="js/consultas.js?v=2">
-  </script>
-  <script src="js/graficas.js">
-  </script>
-  <script src="js/reporte.js">
-  </script>
-  <script src="js/reporte_general.js">
-  </script>
-  <script src="js/app.js">
-  </script>
-  <script src="js/tour.js?v=3"></script>
+<script src="js/modulos.js"></script>
+<script src="js/fisicoquimicos.js"></script>
+<script src="js/consultas.js?v=2"></script>
+<script src="js/graficas.js"></script>
+<script src="js/reporte.js"></script>
+<script src="js/reporte_general.js"></script>
+<script src="js/app.js"></script>
+<script src="js/tour.js?v=3"></script>
  </body>
 </html>

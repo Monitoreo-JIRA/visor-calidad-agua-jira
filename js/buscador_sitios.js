@@ -359,6 +359,49 @@ function filtrarSitiosBuscador() {
 
 
 // ------------------------------------------
+// OBTENER MUNICIPIO Y LOCALIDAD
+// ------------------------------------------
+
+function obtenerMunicipioSitioBuscador(layer) {
+    const propiedades =
+        layer.feature?.properties ?? {};
+
+    return String(
+        propiedades.Municipio ??
+        propiedades.municipio ??
+        ''
+    ).trim();
+}
+
+
+function obtenerLocalidadSitioBuscador(layer) {
+    const propiedades =
+        layer.feature?.properties ?? {};
+
+    return String(
+        propiedades.Localidad ??
+        propiedades.localidad ??
+        ''
+    ).trim();
+}
+
+
+// ------------------------------------------
+// ORDENAR TEXTO EN ESPAÑOL
+// ------------------------------------------
+
+function ordenarTextoEspanol(a, b) {
+    return String(a).localeCompare(
+        String(b),
+        'es',
+        {
+            sensitivity: 'base'
+        }
+    );
+}
+
+
+// ------------------------------------------
 // CARGAR SITIOS
 // ------------------------------------------
 
@@ -384,12 +427,24 @@ function cargarSitiosEnBuscador() {
             return;
         }
 
+        const municipio =
+            obtenerMunicipioSitioBuscador(
+                layer
+            );
+
+        const localidad =
+            obtenerLocalidadSitioBuscador(
+                layer
+            );
+
         sitiosDisponiblesBuscador.push({
             nombre: nombre,
             nombreNormalizado:
                 normalizarTextoBuscador(
                     nombre
                 ),
+            municipio: municipio,
+            localidad: localidad,
             layer: layer
         });
     });
@@ -691,4 +746,454 @@ const intervaloCargaBuscador =
 
 console.log(
     'Buscador personalizado cargado.'
+);
+
+// ==========================================
+// BUSCADOR POR MUNICIPIO Y LOCALIDAD
+// ==========================================
+
+const botonMostrarUbicacion =
+    document.getElementById(
+        'boton-mostrar-ubicacion'
+    );
+
+const contenidoBuscadorUbicacion =
+    document.getElementById(
+        'contenido-buscador-ubicacion'
+    );
+
+const filtroMunicipioSitios =
+    document.getElementById(
+        'filtro-municipio-sitios'
+    );
+
+const filtroLocalidadSitios =
+    document.getElementById(
+        'filtro-localidad-sitios'
+    );
+
+const contadorSitiosUbicacion =
+    document.getElementById(
+        'contador-sitios-ubicacion'
+    );
+
+const listaSitiosUbicacion =
+    document.getElementById(
+        'lista-sitios-ubicacion'
+    );
+
+
+// ------------------------------------------
+// LLENAR MUNICIPIOS
+// ------------------------------------------
+
+function cargarMunicipiosBuscador() {
+    if (
+        !filtroMunicipioSitios ||
+        sitiosDisponiblesBuscador.length === 0
+    ) {
+        return;
+    }
+
+    const municipios =
+        [
+            ...new Set(
+                sitiosDisponiblesBuscador
+                    .map(function (sitio) {
+                        return sitio.municipio;
+                    })
+                    .filter(Boolean)
+            )
+        ].sort(ordenarTextoEspanol);
+
+    filtroMunicipioSitios.innerHTML = '';
+
+    const opcionInicial =
+        document.createElement(
+            'option'
+        );
+
+    opcionInicial.value = '';
+    opcionInicial.textContent =
+        'Seleccionar municipio...';
+
+    filtroMunicipioSitios.appendChild(
+        opcionInicial
+    );
+
+    municipios.forEach(
+        function (municipio) {
+            const opcion =
+                document.createElement(
+                    'option'
+                );
+
+            opcion.value = municipio;
+            opcion.textContent = municipio;
+
+            filtroMunicipioSitios.appendChild(
+                opcion
+            );
+        }
+    );
+}
+
+
+// ------------------------------------------
+// LLENAR LOCALIDADES
+// ------------------------------------------
+
+function cargarLocalidadesBuscador(
+    municipio
+) {
+    if (!filtroLocalidadSitios) {
+        return;
+    }
+
+    filtroLocalidadSitios.innerHTML = '';
+
+    if (!municipio) {
+        const opcion =
+            document.createElement(
+                'option'
+            );
+
+        opcion.value = '';
+        opcion.textContent =
+            'Selecciona primero un municipio';
+
+        filtroLocalidadSitios.appendChild(
+            opcion
+        );
+
+        filtroLocalidadSitios.disabled = true;
+
+        return;
+    }
+
+    const localidades =
+        [
+            ...new Set(
+                sitiosDisponiblesBuscador
+                    .filter(function (sitio) {
+                        return (
+                            normalizarTextoBuscador(
+                                sitio.municipio
+                            ) ===
+                            normalizarTextoBuscador(
+                                municipio
+                            )
+                        );
+                    })
+                    .map(function (sitio) {
+                        return sitio.localidad;
+                    })
+                    .filter(Boolean)
+            )
+        ].sort(ordenarTextoEspanol);
+
+    const opcionTodas =
+        document.createElement(
+            'option'
+        );
+
+    opcionTodas.value = '';
+    opcionTodas.textContent =
+        'Todas las localidades';
+
+    filtroLocalidadSitios.appendChild(
+        opcionTodas
+    );
+
+    localidades.forEach(
+        function (localidad) {
+            const opcion =
+                document.createElement(
+                    'option'
+                );
+
+            opcion.value = localidad;
+            opcion.textContent = localidad;
+
+            filtroLocalidadSitios.appendChild(
+                opcion
+            );
+        }
+    );
+
+    filtroLocalidadSitios.disabled = false;
+}
+
+
+// ------------------------------------------
+// MOSTRAR SITIOS POR UBICACIÓN
+// ------------------------------------------
+
+function mostrarSitiosPorUbicacion() {
+    if (
+        !listaSitiosUbicacion ||
+        !contadorSitiosUbicacion
+    ) {
+        return;
+    }
+
+    const municipio =
+        filtroMunicipioSitios?.value ?? '';
+
+    const localidad =
+        filtroLocalidadSitios?.value ?? '';
+
+    listaSitiosUbicacion.innerHTML = '';
+
+    if (!municipio) {
+        contadorSitiosUbicacion.textContent =
+            '0';
+
+        const mensaje =
+            document.createElement(
+                'p'
+            );
+
+        mensaje.className =
+            'mensaje-sitios-ubicacion';
+
+        mensaje.textContent =
+            'Selecciona un municipio para mostrar sus sitios.';
+
+        listaSitiosUbicacion.appendChild(
+            mensaje
+        );
+
+        return;
+    }
+
+    const sitiosFiltrados =
+        sitiosDisponiblesBuscador
+            .filter(function (sitio) {
+                const coincideMunicipio =
+                    normalizarTextoBuscador(
+                        sitio.municipio
+                    ) ===
+                    normalizarTextoBuscador(
+                        municipio
+                    );
+
+                const coincideLocalidad =
+                    !localidad ||
+                    normalizarTextoBuscador(
+                        sitio.localidad
+                    ) ===
+                    normalizarTextoBuscador(
+                        localidad
+                    );
+
+                return (
+                    coincideMunicipio &&
+                    coincideLocalidad
+                );
+            })
+            .sort(function (a, b) {
+                return ordenarTextoEspanol(
+                    a.nombre,
+                    b.nombre
+                );
+            });
+
+    contadorSitiosUbicacion.textContent =
+        String(
+            sitiosFiltrados.length
+        );
+
+    if (sitiosFiltrados.length === 0) {
+        const mensaje =
+            document.createElement(
+                'p'
+            );
+
+        mensaje.className =
+            'mensaje-sitios-ubicacion';
+
+        mensaje.textContent =
+            'No hay sitios disponibles para esta selección.';
+
+        listaSitiosUbicacion.appendChild(
+            mensaje
+        );
+
+        return;
+    }
+
+    sitiosFiltrados.forEach(
+        function (sitio) {
+            const boton =
+                document.createElement(
+                    'button'
+                );
+
+            boton.type = 'button';
+            boton.className =
+                'boton-sitio-ubicacion';
+
+            const contenido =
+                document.createElement(
+                    'span'
+                );
+
+            contenido.className =
+                'contenido-sitio-ubicacion';
+
+            const nombre =
+                document.createElement(
+                    'strong'
+                );
+
+            nombre.textContent =
+                sitio.nombre;
+
+            contenido.appendChild(
+                nombre
+            );
+
+            if (sitio.localidad) {
+                const detalle =
+                    document.createElement(
+                        'small'
+                    );
+
+                detalle.textContent =
+                    sitio.localidad;
+
+                contenido.appendChild(
+                    detalle
+                );
+            }
+
+            boton.appendChild(
+                contenido
+            );
+
+            boton.addEventListener(
+                'click',
+                function () {
+                    campoBuscarSitio.value =
+                        sitio.nombre;
+
+                    seleccionarSitioBuscador(
+                        sitio
+                    );
+                }
+            );
+
+            listaSitiosUbicacion.appendChild(
+                boton
+            );
+        }
+    );
+}
+
+
+// ------------------------------------------
+// ABRIR Y CERRAR
+// ------------------------------------------
+
+if (
+    botonMostrarUbicacion &&
+    contenidoBuscadorUbicacion
+) {
+    botonMostrarUbicacion.addEventListener(
+        'click',
+        function () {
+            const seAbrira =
+                contenidoBuscadorUbicacion
+                    .classList
+                    .contains(
+                        'oculto'
+                    );
+
+            contenidoBuscadorUbicacion
+                .classList
+                .toggle(
+                    'oculto'
+                );
+
+            botonMostrarUbicacion.setAttribute(
+                'aria-expanded',
+                seAbrira
+                    ? 'true'
+                    : 'false'
+            );
+        }
+    );
+}
+
+
+// ------------------------------------------
+// EVENTOS
+// ------------------------------------------
+
+if (filtroMunicipioSitios) {
+    filtroMunicipioSitios.addEventListener(
+        'change',
+        function () {
+            cargarLocalidadesBuscador(
+                this.value
+            );
+
+            mostrarSitiosPorUbicacion();
+        }
+    );
+}
+
+
+if (filtroLocalidadSitios) {
+    filtroLocalidadSitios.addEventListener(
+        'change',
+        mostrarSitiosPorUbicacion
+    );
+}
+
+
+// ------------------------------------------
+// PREPARAR CUANDO CARGUEN LOS SITIOS
+// ------------------------------------------
+
+function prepararBuscadorUbicacion() {
+    if (
+        sitiosDisponiblesBuscador.length === 0
+    ) {
+        return false;
+    }
+
+    cargarMunicipiosBuscador();
+    mostrarSitiosPorUbicacion();
+
+    return true;
+}
+
+
+let intentosCargaUbicacion = 0;
+
+const intervaloCargaUbicacion =
+    setInterval(
+        function () {
+            const listo =
+                prepararBuscadorUbicacion();
+
+            intentosCargaUbicacion += 1;
+
+            if (
+                listo ||
+                intentosCargaUbicacion >= 40
+            ) {
+                clearInterval(
+                    intervaloCargaUbicacion
+                );
+            }
+        },
+        250
+    );
+
+
+console.log(
+    'Buscador por municipio y localidad cargado.'
 );
