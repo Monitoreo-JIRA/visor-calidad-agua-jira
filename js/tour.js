@@ -304,10 +304,10 @@ document.addEventListener(
 
                         popover: {
                             title:
-                                'Capas y simbología',
+                                'Herramientas del mapa',
 
                             description:
-                                'Usa estos botones para activar o desactivar capas, consultar la simbología bacteriológica y acceder al glosario de párametros y unidades.',
+                                'Usa estos botones para activar o desactivar capas, consultar la simbología bacteriológica y acceder al glosario de parámetros y unidades.',
 
                             side: 'left',
                             align: 'start'
