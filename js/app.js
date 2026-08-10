@@ -37,14 +37,17 @@ function contraerPanelLateral() {
         'panel-abierto'
     );
 
-    setTimeout(function () {
-        if (
-            typeof map !== 'undefined' &&
-            map
-        ) {
-            map.invalidateSize();
-        }
-    }, 260);
+    setTimeout(
+        function () {
+            if (
+                typeof map !== 'undefined' &&
+                map
+            ) {
+                map.invalidateSize();
+            }
+        },
+        260
+    );
 }
 
 
@@ -57,14 +60,17 @@ function abrirPanelLateral() {
         'panel-abierto'
     );
 
-    setTimeout(function () {
-        if (
-            typeof map !== 'undefined' &&
-            map
-        ) {
-            map.invalidateSize();
-        }
-    }, 260);
+    setTimeout(
+        function () {
+            if (
+                typeof map !== 'undefined' &&
+                map
+            ) {
+                map.invalidateSize();
+            }
+        },
+        260
+    );
 }
 
 
@@ -73,17 +79,15 @@ botonPanelElemento.addEventListener(
     contraerPanelLateral
 );
 
-
 botonAbrirPanel.addEventListener(
     'click',
     abrirPanelLateral
 );
 
 
-/*
-   Abrir directamente el módulo
-   bacteriológico.
-*/
+// ------------------------------------------
+// ABRIR MÓDULO BACTERIOLÓGICO
+// ------------------------------------------
 
 accesoBacteriologico.addEventListener(
     'click',
@@ -97,16 +101,16 @@ accesoBacteriologico.addEventListener(
         );
 
         abrirPanelLateral();
-        const botonLeyendaFlotante =
-    document.getElementById(
-        'boton-leyenda-flotante'
-    );
 
-if (botonLeyendaFlotante) {
-    botonLeyendaFlotante.style.display =
-        'flex';
-}
-       
+        const botonLeyendaFlotante =
+            document.getElementById(
+                'boton-leyenda-flotante'
+            );
+
+        if (botonLeyendaFlotante) {
+            botonLeyendaFlotante.style.display =
+                'flex';
+        }
 
         const botonBacteriologico =
             document.getElementById(
@@ -120,10 +124,9 @@ if (botonLeyendaFlotante) {
 );
 
 
-/*
-   Abrir directamente el módulo
-   fisicoquímico.
-*/
+// ------------------------------------------
+// ABRIR MÓDULO FISICOQUÍMICO
+// ------------------------------------------
 
 accesoFisicoquimico.addEventListener(
     'click',
@@ -137,15 +140,16 @@ accesoFisicoquimico.addEventListener(
         );
 
         abrirPanelLateral();
-        const botonLeyendaFlotante =
-    document.getElementById(
-        'boton-leyenda-flotante'
-    );
 
-if (botonLeyendaFlotante) {
-    botonLeyendaFlotante.style.display =
-        'none';
-}
+        const botonLeyendaFlotante =
+            document.getElementById(
+                'boton-leyenda-flotante'
+            );
+
+        if (botonLeyendaFlotante) {
+            botonLeyendaFlotante.style.display =
+                'none';
+        }
 
         const botonFisicoquimicos =
             document.getElementById(
@@ -157,6 +161,12 @@ if (botonLeyendaFlotante) {
         }
     }
 );
+
+
+// ------------------------------------------
+// ESTADO INICIAL DEL PANEL
+// ------------------------------------------
+
 if (
     panelLateralElemento &&
     !panelLateralElemento.classList.contains(

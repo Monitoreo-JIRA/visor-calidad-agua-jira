@@ -129,7 +129,7 @@ document.addEventListener(
                                             </strong>
 
                                             <small>
-                                                Consulta <em>E. coli,<em>
+                                                Consulta <em>E. coli</em>,
                                                 aptitud recreativa y
                                                 nivel de atención.
                                             </small>
