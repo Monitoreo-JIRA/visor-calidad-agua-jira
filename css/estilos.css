@@ -1071,6 +1071,25 @@ body {
     stroke-linecap: round;
     stroke-linejoin: round;
 }
+/* Ícono del glosario */
+
+.icono-glosario-svg {
+    width: 26px;
+    height: 26px;
+    overflow: visible;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icono-glosario-svg circle,
+.icono-glosario-svg line {
+    fill: none;
+    stroke: currentColor;
+}
 .boton-mapa-flotante.activo {
     background-color: #176f8f;
     color: white;
@@ -1825,4 +1844,306 @@ body.panel-abierto .leaflet-control-scale {
     color: #6c7d85;
     font-size: 10.5px;
     line-height: 1.25;
+}
+/* ==========================================
+   GLOSARIO DE PARÁMETROS
+========================================== */
+
+.icono-glosario-svg {
+    width: 26px;
+    height: 26px;
+    overflow: visible;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icono-glosario-svg circle,
+.icono-glosario-svg line {
+    fill: none;
+    stroke: currentColor;
+}
+
+
+/* Fondo del modal */
+
+.modal-glosario {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background-color:
+        rgba(20, 37, 46, 0.68);
+}
+
+
+/* Ventana */
+
+.ventana-glosario {
+    width: min(720px, 96vw);
+    max-height: 86vh;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+    background-color: #ffffff;
+
+    box-shadow:
+        0 18px 50px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+/* Encabezado */
+
+.glosario-encabezado {
+    padding: 20px 22px 16px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-bottom:
+        1px solid #d7e0e4;
+}
+
+.glosario-encabezado h2 {
+    margin: 0 0 5px;
+
+    color: #263238;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.glosario-encabezado p {
+    margin: 0;
+
+    max-width: 560px;
+
+    color: #60717a;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* Cerrar */
+
+.cerrar-glosario {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #526873;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.cerrar-glosario:hover {
+    background-color: #eef3f5;
+    color: #176f8f;
+}
+
+
+/* Pestañas */
+
+.glosario-pestanas {
+    padding: 12px 22px 0;
+
+    display: flex;
+    gap: 6px;
+
+    background-color: #ffffff;
+}
+
+.glosario-pestana {
+    padding: 8px 14px;
+
+    border: 1px solid #cad6db;
+    border-radius: 6px 6px 0 0;
+
+    background-color: #f4f7f8;
+    color: #526873;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.glosario-pestana:hover {
+    background-color: #eaf3f6;
+    color: #176f8f;
+}
+
+.glosario-pestana.activo {
+    border-color: #176f8f;
+
+    background-color: #176f8f;
+    color: #ffffff;
+}
+
+
+/* Contenido desplazable */
+
+.glosario-contenido {
+    padding: 18px 22px 22px;
+
+    overflow-y: auto;
+
+    background-color: #f8fafb;
+}
+
+
+/* Tarjetas de parámetros */
+
+.glosario-parametro {
+    margin-bottom: 12px;
+    padding: 14px 15px;
+
+    border: 1px solid #d7e0e4;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+}
+
+.glosario-parametro:last-child {
+    margin-bottom: 0;
+}
+
+
+.glosario-parametro-titulo {
+    margin-bottom: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.glosario-parametro h3 {
+    margin: 0;
+
+    color: #263238;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.glosario-unidad {
+    flex-shrink: 0;
+
+    padding: 4px 8px;
+
+    border-radius: 12px;
+
+    background-color: #e7f2f6;
+    color: #176f8f;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.glosario-parametro p {
+    margin: 0 0 8px;
+
+    color: #52646c;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.glosario-parametro p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Importancia ambiental */
+
+.glosario-importancia {
+    padding: 8px 10px;
+
+    border-left:
+        3px solid #176f8f;
+
+    border-radius: 0 4px 4px 0;
+
+    background-color: #f1f7f9;
+}
+
+.glosario-importancia strong {
+    color: #33434b;
+}
+
+
+/* Celular */
+
+@media (max-width: 600px) {
+
+    .modal-glosario {
+        padding: 12px;
+    }
+
+    .ventana-glosario {
+        width: 100%;
+        max-height: 92vh;
+    }
+
+    .glosario-encabezado {
+        padding: 16px;
+    }
+
+    .glosario-encabezado h2 {
+        font-size: 19px;
+    }
+
+    .glosario-pestanas {
+        padding:
+            10px 16px 0;
+    }
+
+    .glosario-pestana {
+        flex: 1;
+
+        padding:
+            8px 6px;
+
+        font-size: 11px;
+    }
+
+    .glosario-contenido {
+        padding: 14px 16px 18px;
+    }
+
+    .glosario-parametro-titulo {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+/* Mantener oculto el modal y las secciones
+   inactivas cuando corresponda */
+
+.modal-glosario.oculto,
+.glosario-seccion.oculto {
+    display: none;
 }

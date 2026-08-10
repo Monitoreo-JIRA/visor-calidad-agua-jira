@@ -330,7 +330,7 @@
          </tr>
          <tr>
           <td>
-           Conductividad
+           Conductividad eléctrica
           </td>
           <td id="resultado-conductividad">
            &mdash;
@@ -383,6 +383,25 @@
        </path>
       </svg>
      </button>
+     <!-- GLOSARIO -->
+     <button
+      id="boton-glosario"
+      class="boton-mapa-flotante"
+      type="button"
+      title="Glosario de parámetros"
+      aria-label="Abrir glosario de parámetros">
+      
+      <svg
+       class="icono-glosario-svg"
+       viewBox="0 0 32 32"
+       aria-hidden="true">
+       
+       <circle cx="16" cy="16" r="11"></circle>
+       <line x1="16" y1="14" x2="16" y2="23"></line>
+       <circle cx="16" cy="9" r="1.2"></circle>
+       
+      </svg>
+     </button>
      <button aria-label="Mostrar u ocultar la simbolog&iacute;a bacteriol&oacute;gica" class="boton-mapa-flotante" id="boton-leyenda-flotante" title="Simbolog&iacute;a bacteriol&oacute;gica" type="button">
       <svg aria-hidden="true" class="icono-leyenda-svg" viewbox="0 0 32 32">
        <circle cx="8" cy="8" r="3">
@@ -423,6 +442,7 @@
        Sitios de monitoreo
       </label>
      </div>
+    
     </div>
     <div class="panel-mapa-flotante oculto" id="panel-leyenda-flotante">
      <div class="panel-mapa-encabezado">
@@ -466,7 +486,494 @@
     </div>
    </section>
   </main>
-  <!--
+  <!-- =====================================
+     GLOSARIO DE PARÁMETROS
+====================================== -->
+
+<div
+    id="modal-glosario"
+    class="modal-glosario oculto"
+    aria-hidden="true"
+>
+    <div
+        class="ventana-glosario"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-glosario"
+    >
+
+        <div class="glosario-encabezado">
+
+            <div>
+                <h2 id="titulo-glosario">
+                    Glosario de parámetros
+                </h2>
+
+                <p>
+                    Conoce qué representan los parámetros
+                    utilizados para evaluar la calidad del agua
+                    y su importancia ambiental.
+                </p>
+            </div>
+
+            <button
+                id="cerrar-glosario"
+                class="cerrar-glosario"
+                type="button"
+                aria-label="Cerrar glosario"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="glosario-pestanas"
+            role="tablist"
+            aria-label="Categorías del glosario"
+        >
+
+            <button
+                class="glosario-pestana activo"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-glosario="bacteriologicos"
+            >
+                Bacteriológicos
+            </button>
+
+            <button
+                class="glosario-pestana"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-glosario="fisicoquimicos"
+            >
+                Fisicoquímicos
+            </button>
+<button
+    class="glosario-pestana"
+    type="button"
+    role="tab"
+    aria-selected="false"
+    data-glosario="unidades"
+>
+    Unidades
+</button>
+        </div>
+
+
+        <div class="glosario-contenido">
+
+            <!-- BACTERIOLÓGICOS -->
+
+            <section
+                id="glosario-bacteriologicos"
+                class="glosario-seccion"
+            >
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+
+                        <h3>
+                            <em>Escherichia coli</em>
+                            (<em>E. coli</em>)
+                        </h3>
+
+                        <span class="glosario-unidad">
+                            NMP/100 mL
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Indicador principal de contaminación fecal
+                        reciente. Su presencia indica contaminación
+                        fecal y puede estar asociada con el ingreso
+                        de aguas residuales o materia fecal.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Riesgo sanitario:</strong>
+                        Ayuda a evaluar el riesgo de enfermedades
+                        asociado al contacto o consumo del agua.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Concentraciones elevadas pueden señalar
+                        deterioro de la calidad del agua por aportes
+                        de actividades humanas o pecuarias.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+
+                        <h3>
+                            Coliformes totales
+                        </h3>
+
+                        <span class="glosario-unidad">
+                            NMP/100 mL
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Indicador general de la calidad microbiológica
+                        del agua. A diferencia de <em>E. coli</em>,
+                        pueden encontrarse de forma natural en el suelo
+                        y la vegetación, por lo que su presencia por sí
+                        sola no confirma contaminación fecal.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Valores elevados pueden indicar alteraciones
+                        recientes en el cuerpo de agua y ayudar a
+                        identificar posibles fuentes de contaminación.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <!-- FISICOQUÍMICOS -->
+
+            <section
+                id="glosario-fisicoquimicos"
+                class="glosario-seccion oculto"
+            >
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>pH</h3>
+                        <span class="glosario-unidad">
+                            Sin unidad · Escala 0–14
+                        </span>
+                    </div>
+
+                    <p>
+                        Mide la acidez o alcalinidad del agua;
+                        un valor de 7 se considera neutro.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Valores demasiado ácidos o alcalinos pueden
+                        generar estrés en los organismos acuáticos y
+                        modificar la disponibilidad o toxicidad de
+                        algunas sustancias presentes en el agua.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Oxígeno disuelto (OD)</h3>
+                        <span class="glosario-unidad">
+                            mg/L
+                        </span>
+                    </div>
+
+                    <p>
+                        Cantidad de oxígeno disponible en el agua,
+                        fundamental para la respiración de peces y
+                        otros organismos acuáticos.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Niveles bajos pueden generar condiciones de
+                        hipoxia, estrés o mortalidad de organismos y
+                        pueden estar asociados con una elevada presencia
+                        de materia orgánica en descomposición.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Saturación de oxígeno</h3>
+                        <span class="glosario-unidad">
+                            %
+                        </span>
+                    </div>
+
+                    <p>
+                        Porcentaje de oxígeno disuelto presente respecto
+                        a la cantidad que el agua puede contener bajo
+                        determinadas condiciones de temperatura y presión.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Valores muy bajos pueden asociarse con procesos
+                        de descomposición y consumo de oxígeno. Valores
+                        muy altos o de sobresaturación pueden relacionarse
+                        con una intensa actividad fotosintética.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Temperatura del agua</h3>
+                        <span class="glosario-unidad">
+                            °C
+                        </span>
+                    </div>
+
+                    <p>
+                        Indica la temperatura del agua al momento del
+                        monitoreo e influye en numerosos procesos físicos,
+                        químicos y biológicos.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Relación clave:</strong>
+                        A mayor temperatura, generalmente disminuye la
+                        capacidad del agua para retener oxígeno disuelto.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Conductividad eléctrica (CE)</h3>
+                        <span class="glosario-unidad">
+                            µS/cm
+                        </span>
+                    </div>
+
+                    <p>
+                        Indica la capacidad del agua para conducir
+                        corriente eléctrica y está relacionada con
+                        la cantidad de sales e iones disueltos.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Cambios abruptos pueden indicar aportes de
+                        descargas, escorrentía agrícola o variaciones
+                        naturales en la composición y el caudal del agua.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Sólidos disueltos totales (TDS)</h3>
+                        <span class="glosario-unidad">
+                            ppm
+                        </span>
+                    </div>
+
+                    <p>
+                        Representan la cantidad total de sales,
+                        minerales y otras sustancias disueltas
+                        en el agua.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Cambios importantes pueden afectar la
+                        osmorregulación de los organismos y señalar
+                        variaciones en los aportes naturales o posibles
+                        fuentes de contaminación.
+                    </p>
+                </article>
+
+
+                <article class="glosario-parametro">
+                    <div class="glosario-parametro-titulo">
+                        <h3>Salinidad</h3>
+                        <span class="glosario-unidad">
+                            PSU
+                        </span>
+                    </div>
+
+                    <p>
+                        Indica la cantidad relativa de sales disueltas
+                        presentes en el agua y ayuda a caracterizar
+                        ambientes de agua dulce, salobre o marina.
+                    </p>
+
+                    <p class="glosario-importancia">
+                        <strong>Impacto ambiental:</strong>
+                        Las especies están adaptadas a determinados
+                        rangos de salinidad; cambios bruscos pueden
+                        provocar estrés osmótico y afectar su
+                        supervivencia.
+                    </p>
+                                </article>
+
+            </section>
+
+
+            <!-- =================================
+                 UNIDADES DE MEDIDA
+            ================================== -->
+
+            <section
+                id="glosario-unidades"
+                class="glosario-seccion oculto"
+            >
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>NMP/100 mL</h3>
+
+                        <span class="glosario-unidad">
+                            Microbiología
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>
+                            Número Más Probable por 100 mililitros.
+                        </strong>
+                        Es una estimación de la concentración de
+                        microorganismos presentes en una muestra de agua.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>mg/L</h3>
+
+                        <span class="glosario-unidad">
+                            Concentración
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Miligramos por litro.</strong>
+                        Expresa la cantidad de una sustancia presente en
+                        un litro de agua. En el visor se utiliza para
+                        reportar el oxígeno disuelto.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>%</h3>
+
+                        <span class="glosario-unidad">
+                            Porcentaje
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Porcentaje.</strong>
+                        En la saturación de oxígeno indica la proporción
+                        de oxígeno presente respecto a la cantidad que
+                        el agua puede contener bajo determinadas
+                        condiciones.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>°C</h3>
+
+                        <span class="glosario-unidad">
+                            Temperatura
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Grados Celsius.</strong>
+                        Unidad utilizada para expresar la temperatura
+                        del agua.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>µS/cm</h3>
+
+                        <span class="glosario-unidad">
+                            Conductividad
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Microsiemens por centímetro.</strong>
+                        Unidad utilizada para expresar la conductividad
+                        eléctrica del agua, es decir, su capacidad para
+                        conducir corriente eléctrica.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>ppm</h3>
+
+                        <span class="glosario-unidad">
+                            Concentración
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Partes por millón.</strong>
+                        Unidad de concentración utilizada en el visor
+                        para expresar los sólidos disueltos totales.
+                    </p>
+
+                </article>
+
+
+                <article class="glosario-parametro">
+
+                    <div class="glosario-parametro-titulo">
+                        <h3>PSU</h3>
+
+                        <span class="glosario-unidad">
+                            Salinidad
+                        </span>
+                    </div>
+
+                    <p>
+                        <strong>Unidad Práctica de Salinidad.</strong>
+                        Se utiliza para expresar la salinidad del agua
+                        a partir de sus propiedades conductivas.
+                    </p>
+
+                </article>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+  
     VENTANA DE GRÁFICAS
 -->
   <div class="modal-grafica oculto" id="modal-grafica">
@@ -654,6 +1161,7 @@
 <script src="js/reporte.js"></script>
 <script src="js/reporte_general.js"></script>
 <script src="js/app.js"></script>
+<script src="js/glosario.js"></script>
 <script src="js/tour.js?v=3"></script>
  </body>
 </html>
