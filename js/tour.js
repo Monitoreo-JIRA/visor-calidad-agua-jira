@@ -307,7 +307,7 @@ document.addEventListener(
                                 'Capas y simbología',
 
                             description:
-                                'Usa estos botones para activar o desactivar capas y consultar la simbología bacteriológica.',
+                                'Usa estos botones para activar o desactivar capas, consultar la simbología bacteriológica y acceder al glosario de párametros y unidades.',
 
                             side: 'left',
                             align: 'start'
