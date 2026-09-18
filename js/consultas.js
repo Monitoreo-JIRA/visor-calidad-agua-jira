@@ -13,14 +13,39 @@ const colorCercaCriterio = '#f2c94c';
 const colorNoApto = '#d9363e';
 
 
-function obtenerColorResultado(registro) {
+function obtenerValorEcoli(registro) {
     if (!registro) {
-        return colorSinDatos;
+        return null;
     }
 
-    const eColi = Number(registro.E_coli_100mL);
+    const valorOriginal = registro.E_coli_100mL;
+
+    // Detectar valores sin dato antes de convertirlos a número
+    if (
+        valorOriginal === undefined ||
+        valorOriginal === null ||
+        valorOriginal === '' ||
+        String(valorOriginal).trim() === '' ||
+        String(valorOriginal).trim().toLowerCase() === 'sd' ||
+        String(valorOriginal).trim().toLowerCase() === 'sin datos'
+    ) {
+        return null;
+    }
+
+    const eColi = Number(valorOriginal);
 
     if (!Number.isFinite(eColi)) {
+        return null;
+    }
+
+    return eColi;
+}
+
+
+function obtenerColorResultado(registro) {
+    const eColi = obtenerValorEcoli(registro);
+
+    if (eColi === null) {
         return colorSinDatos;
     }
 
@@ -34,14 +59,12 @@ function obtenerColorResultado(registro) {
 
     return colorNoApto;
 }
+
+
 function obtenerAptitudResultado(registro) {
-    if (!registro) {
-        return 'SD';
-    }
+    const eColi = obtenerValorEcoli(registro);
 
-    const eColi = Number(registro.E_coli_100mL);
-
-    if (!Number.isFinite(eColi)) {
+    if (eColi === null) {
         return 'SD';
     }
 
@@ -52,13 +75,9 @@ function obtenerAptitudResultado(registro) {
 
 
 function obtenerInterpretacionResultado(registro) {
-    if (!registro) {
-        return 'Sin datos';
-    }
+    const eColi = obtenerValorEcoli(registro);
 
-    const eColi = Number(registro.E_coli_100mL);
-
-    if (!Number.isFinite(eColi)) {
+    if (eColi === null) {
         return 'Sin datos';
     }
 
