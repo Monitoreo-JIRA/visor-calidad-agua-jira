@@ -381,20 +381,12 @@ function crearFilasBacteriologicasReporte(
                         <td>SD</td>
                         <td>SD</td>
                         <td>SD</td>
-                        <td>SD</td>
                     </tr>
                 `;
             }
 
-            const aptitud =
-                registro
-                    .Aptitud_Recreativa_Calculada ??
-                'SD';
-
-            const nivel =
-                registro
-                    .Nivel_Atencion_Calculado ??
-                'SD';
+           const aptitud =
+    obtenerAptitudResultado(registro);
 
             return `
                 <tr>
@@ -415,7 +407,6 @@ function crearFilasBacteriologicasReporte(
 
                     <td>${aptitud}</td>
 
-                    <td>${nivel}</td>
                 </tr>
             `;
         })
@@ -1186,9 +1177,6 @@ if (anioReporte) {
                                 Aptitud
                             </th>
 
-                            <th>
-                                Nivel
-                            </th>
                         </tr>
                     </thead>
 

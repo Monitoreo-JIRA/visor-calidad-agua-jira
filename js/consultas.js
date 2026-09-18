@@ -8,9 +8,9 @@ const botonConsultar =
     document.querySelector('.boton-consulta');
 
 const colorSinDatos = '#9e9e9e';
-const colorBajo = '#2e9d50';
-const colorModerado = '#f2c94c';
-const colorAlto = '#d9363e';
+const colorApto = '#2e9d50';
+const colorCercaCriterio = '#f2c94c';
+const colorNoApto = '#d9363e';
 
 
 function obtenerColorResultado(registro) {
@@ -18,25 +18,59 @@ function obtenerColorResultado(registro) {
         return colorSinDatos;
     }
 
-    const nivel = String(
-        registro.Nivel_Atencion_Calculado ?? ''
-    )
-        .trim()
-        .toLowerCase();
+    const eColi = Number(registro.E_coli_100mL);
 
-    if (nivel === 'bajo') {
-        return colorBajo;
+    if (!Number.isFinite(eColi)) {
+        return colorSinDatos;
     }
 
-    if (nivel === 'moderado') {
-        return colorModerado;
+    if (eColi < 100) {
+        return colorApto;
     }
 
-    if (nivel === 'alto') {
-        return colorAlto;
+    if (eColi <= 200) {
+        return colorCercaCriterio;
     }
 
-    return colorSinDatos;
+    return colorNoApto;
+}
+function obtenerAptitudResultado(registro) {
+    if (!registro) {
+        return 'SD';
+    }
+
+    const eColi = Number(registro.E_coli_100mL);
+
+    if (!Number.isFinite(eColi)) {
+        return 'SD';
+    }
+
+    return eColi <= 200
+        ? 'Apto'
+        : 'No apto';
+}
+
+
+function obtenerInterpretacionResultado(registro) {
+    if (!registro) {
+        return 'Sin datos';
+    }
+
+    const eColi = Number(registro.E_coli_100mL);
+
+    if (!Number.isFinite(eColi)) {
+        return 'Sin datos';
+    }
+
+    if (eColi < 100) {
+        return 'Cumple el criterio';
+    }
+
+    if (eColi <= 200) {
+        return 'Cerca del criterio';
+    }
+
+    return 'Supera el criterio';
 }
 
 
@@ -295,44 +329,23 @@ function crearPopupResultado(
                 </span>
             </div>
 
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Aptitud
-                </span>
-                <span>
-                    ${
-                        registro
-                            .Aptitud_Recreativa_Calculada ??
-                        'SD'
-                    }
-                </span>
-            </div>
+         <div class="popup-linea">
+    <span class="popup-etiqueta">
+        Aptitud
+    </span>
+    <span>
+        ${obtenerAptitudResultado(registro)}
+    </span>
+</div>
 
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Nivel
-                </span>
-                <span>
-                    ${
-                        registro
-                            .Nivel_Atencion_Calculado ??
-                        'SD'
-                    }
-                </span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Interpretación
-                </span>
-                <span>
-                    ${
-                        registro
-                            .Interpretacion_Calculada ??
-                        'Sin datos'
-                    }
-                </span>
-            </div>
+           <div class="popup-linea">
+    <span class="popup-etiqueta">
+        Interpretación
+    </span>
+    <span>
+        ${obtenerInterpretacionResultado(registro)}
+    </span>
+</div>
         </div>
     `;
 }
