@@ -2197,3 +2197,30 @@ body.panel-abierto .leaflet-control-scale {
         gap: 3px;
     }
 }
+
+/* Fotografía de referencia en ventanas del mapa */
+
+.popup-fotografia {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0 12px;
+    overflow: hidden;
+}
+
+
+.popup-fotografia img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+
+.popup-fotografia p {
+    margin: 5px 0 0;
+    font-size: 10px;
+    color: #687780;
+    text-align: center;
+}
