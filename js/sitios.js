@@ -5,6 +5,30 @@
 let capaSitios = null;
 let sitioSeleccionado = null;
 
+function obtenerFotografiaSitio(id) {
+    const idSitio = String(id ?? '')
+        .trim()
+        .toUpperCase();
+
+    if (!/^S\d+$/.test(idSitio)) {
+        return '';
+    }
+
+    return `
+        <div class="popup-fotografia">
+            <img
+                src="images/sitios/${idSitio}.jpg"
+                alt="Fotografía de referencia del sitio ${idSitio}"
+                onerror="
+                    this.style.display='none';
+                    this.nextElementSibling.textContent =
+                        'Fotografía no disponible';
+                "
+            >
+            <p>Fotografía de referencia del sitio</p>
+        </div>
+    `;
+}
 
 /**
  * Cargar la capa de sitios después de que
@@ -97,48 +121,37 @@ async function cargarSitiosMonitoreo() {
                         }
                     );
 
-                    layer.bindPopup(`
-                        <div class="popup-sitio">
-                            <h3>${nombre}</h3>
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">ID</span>
-                                <span>${id}</span>
-                            </div>
+layer.bindPopup(`
+    <div class="popup-sitio">
+        <h3>${nombre}</h3>
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">Subcuenca</span>
-                                <span>${subcuenca}</span>
-                            </div>
+        ${obtenerFotografiaSitio(id)}
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">Microcuenca</span>
-                                <span>${microcuenca}</span>
-                            </div>
+        <div class="popup-linea">
+            <span class="popup-etiqueta">ID</span>
+            <span>${id}</span>
+        </div>
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">Municipio</span>
-                                <span>${municipio}</span>
-                            </div>
+        <div class="popup-linea">
+            <span class="popup-etiqueta">Municipio</span>
+            <span>${municipio}</span>
+        </div>
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">Localidad</span>
-                                <span>${localidad}</span>
-                            </div>
+        <div class="popup-linea">
+            <span class="popup-etiqueta">Localidad</span>
+            <span>${localidad}</span>
+        </div>
 
-                            <div class="popup-linea">
-                                <span class="popup-etiqueta">Altitud</span>
-                                <span>${altitud} m s. n. m.</span>
-                            </div>
+        <hr>
 
-                            <hr>
+        <div class="popup-mensaje">
+            Selecciona un año y un mes para consultar
+            los resultados de calidad del agua.
+        </div>
+    </div>
+`);
 
-                            <div class="popup-mensaje">
-                                Selecciona un año y un mes para consultar
-                                los resultados de calidad del agua.
-                            </div>
-                        </div>
-                    `);
 
                     layer.on(
                         'click',

@@ -182,16 +182,6 @@ function crearPopupResultado(
         obtenerIdCapa(layer) ??
         'Sin ID';
 
-    const subcuenca =
-        propiedades.Subcuenca ??
-        registro?.Subcuenca ??
-        'Sin información';
-
-    const microcuenca =
-        propiedades.Microcuenca ??
-        registro?.Microcuenca ??
-        'Sin información';
-
     const municipio =
         propiedades.Municipio ??
         registro?.Municipio ??
@@ -202,66 +192,41 @@ function crearPopupResultado(
         registro?.Localidad ??
         'Sin información';
 
-    const altitud =
-        propiedades.Altitud ??
-        registro?.Altitud ??
-        'Sin información';
+// Fotografía de referencia del sitio de monitoreo
+   const fotografia = obtenerFotografiaSitio(id);
+
+    const informacionSitio = `
+        <h3>${nombre}</h3>
+
+        ${fotografia}
+
+        <div class="popup-linea">
+            <span class="popup-etiqueta">ID</span>
+            <span>${id}</span>
+        </div>
+
+        <div class="popup-linea">
+            <span class="popup-etiqueta">Municipio</span>
+            <span>${municipio}</span>
+        </div>
+
+        <div class="popup-linea">
+            <span class="popup-etiqueta">Localidad</span>
+            <span>${localidad}</span>
+        </div>
+
+        <hr>
+
+        <div class="popup-linea">
+            <span class="popup-etiqueta">Periodo</span>
+            <span>${periodo} ${anio}</span>
+        </div>
+    `;
 
     if (!registro) {
         return `
             <div class="popup-sitio">
-                <h3>${nombre}</h3>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">ID</span>
-                    <span>${id}</span>
-                </div>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Subcuenca
-                    </span>
-                    <span>${subcuenca}</span>
-                </div>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Microcuenca
-                    </span>
-                    <span>${microcuenca}</span>
-                </div>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Municipio
-                    </span>
-                    <span>${municipio}</span>
-                </div>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Localidad
-                    </span>
-                    <span>${localidad}</span>
-                </div>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Altitud
-                    </span>
-                    <span>
-                        ${altitud} m s. n. m.
-                    </span>
-                </div>
-
-                <hr>
-
-                <div class="popup-linea">
-                    <span class="popup-etiqueta">
-                        Periodo
-                    </span>
-                    <span>${periodo} ${anio}</span>
-                </div>
+                ${informacionSitio}
 
                 <div class="popup-mensaje">
                     Sin datos disponibles para este sitio.
@@ -272,63 +237,10 @@ function crearPopupResultado(
 
     return `
         <div class="popup-sitio">
-            <h3>${nombre}</h3>
+            ${informacionSitio}
 
             <div class="popup-linea">
-                <span class="popup-etiqueta">ID</span>
-                <span>${id}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Subcuenca
-                </span>
-                <span>${subcuenca}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Microcuenca
-                </span>
-                <span>${microcuenca}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Municipio
-                </span>
-                <span>${municipio}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Localidad
-                </span>
-                <span>${localidad}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Altitud
-                </span>
-                <span>
-                    ${altitud} m s. n. m.
-                </span>
-            </div>
-
-            <hr>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Periodo
-                </span>
-                <span>${periodo} ${anio}</span>
-            </div>
-
-            <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    E. coli
-                </span>
+                <span class="popup-etiqueta">E. coli</span>
                 <span>
                     ${formatearValor(
                         registro.E_coli_100mL
@@ -337,34 +249,27 @@ function crearPopupResultado(
             </div>
 
             <div class="popup-linea">
-                <span class="popup-etiqueta">
-                    Coliformes
-                </span>
+                <span class="popup-etiqueta">Coliformes</span>
                 <span>
                     ${formatearValor(
-                        registro
-                            .Coliformes_Totales_100mL
+                        registro.Coliformes_Totales_100mL
                     )} NMP/100 mL
                 </span>
             </div>
 
-         <div class="popup-linea">
-    <span class="popup-etiqueta">
-        Aptitud
-    </span>
-    <span>
-        ${obtenerAptitudResultado(registro)}
-    </span>
-</div>
+            <div class="popup-linea">
+                <span class="popup-etiqueta">Aptitud</span>
+                <span>
+                    ${obtenerAptitudResultado(registro)}
+                </span>
+            </div>
 
-           <div class="popup-linea">
-    <span class="popup-etiqueta">
-        Interpretación
-    </span>
-    <span>
-        ${obtenerInterpretacionResultado(registro)}
-    </span>
-</div>
+            <div class="popup-linea">
+                <span class="popup-etiqueta">Interpretación</span>
+                <span>
+                    ${obtenerInterpretacionResultado(registro)}
+                </span>
+            </div>
         </div>
     `;
 }
