@@ -63,13 +63,6 @@ fetch('data/geojson/Subcuencas.geojson')
                     const nombre =
                         feature.properties.description;
 
-                    layer.bindTooltip(
-                        nombre,
-                        {
-                            sticky: true
-                        }
-                    );
-
                     layer.on({
                         mouseover: function (
                             evento
@@ -102,7 +95,7 @@ fetch('data/geojson/Subcuencas.geojson')
                     });
                 }
             }
-        ).addTo(map);
+        );
 
 
         // Agregar las subcuencas

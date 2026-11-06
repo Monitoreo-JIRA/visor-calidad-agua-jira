@@ -27,3 +27,11 @@ map.createPane('sitiosPane');
 map.getPane(
     'sitiosPane'
 ).style.zIndex = 650;
+
+// Límites municipales
+map.createPane('municipiosPane');
+map.getPane('municipiosPane').style.zIndex = 450;
+
+// Ríos y cauces monitoreados
+map.createPane('caucesPane');
+map.getPane('caucesPane').style.zIndex = 500;

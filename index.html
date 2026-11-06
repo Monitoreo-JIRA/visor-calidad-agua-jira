@@ -428,21 +428,27 @@
        &times;
       </button>
      </div>
-     <div class="panel-mapa-contenido">
-      <label>
-       <input checked="" id="capa-subcuencas-check" type="checkbox"/>
-       Subcuencas
-      </label>
-      <label>
-       <input checked="" id="capa-cauces-check" type="checkbox"/>
-       Cauces monitoreados
-      </label>
-      <label>
-       <input checked="" id="capa-sitios-check" type="checkbox"/>
-       Sitios de monitoreo
-      </label>
-     </div>
-    
+<div class="panel-mapa-contenido">
+    <label>
+        <input id="capa-subcuencas-check" type="checkbox">
+        Subcuencas
+    </label>
+
+    <label>
+        <input checked id="capa-cauces-check" type="checkbox">
+        Cauces monitoreados
+    </label>
+
+    <label>
+        <input checked id="capa-sitios-check" type="checkbox">
+        Sitios de monitoreo
+    </label>
+
+    <label>
+        <input checked id="capa-municipios-check" type="checkbox">
+        Límites municipales
+    </label>
+</div>
     </div>
     <div class="panel-mapa-flotante oculto" id="panel-leyenda-flotante">
      <div class="panel-mapa-encabezado">
@@ -1190,6 +1196,7 @@
 <script src="js/mapa.js"></script>
 <script src="js/capas.js"></script>
 <script src="js/subcuencas.js"></script>
+<script src="js/municipios.js"></script>
 <script src="js/cauces.js?v=2"></script>
 <script src="js/datos.js"></script>
 <script src="js/sitios.js"></script>

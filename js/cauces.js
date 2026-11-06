@@ -19,7 +19,7 @@ fetch(
             L.geoJSON(
                 datos,
                 {
-                    pane: 'overlayPane',
+                    pane: 'caucesPane',
 
                     style: function () {
                         return {

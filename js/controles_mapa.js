@@ -61,7 +61,10 @@ const checkSitios =
     document.getElementById(
         'capa-sitios-check'
     );
-
+const checkMunicipios =
+    document.getElementById(
+        'capa-municipios-check'
+    );
 
 // ==========================================
 // ABRIR Y CERRAR PANELES
@@ -215,6 +218,15 @@ checkSitios.addEventListener(
         actualizarCapa(
             window.capaSitios ??
                 capaSitios,
+            this.checked
+        );
+    }
+);
+checkMunicipios.addEventListener(
+    'change',
+    function () {
+        actualizarCapa(
+            window.capaMunicipios,
             this.checked
         );
     }
