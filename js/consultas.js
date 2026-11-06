@@ -274,7 +274,105 @@ function crearPopupResultado(
     `;
 }
 
+// ==========================================
+// FILTRAR SITIOS POR COLOR DE RESULTADO
+// ==========================================
 
+const filtroResultado =
+    document.getElementById('filtro-resultado');
+
+const mensajeFiltroResultado =
+    document.getElementById('mensaje-filtro-resultado');
+
+let resultadosConsultaActual = null;
+
+function aplicarFiltroResultado() {
+    if (!filtroResultado || !resultadosConsultaActual || !capaSitios) {
+        return;
+    }
+
+    const seleccion = filtroResultado.value;
+
+    const colores = {
+        verde: colorApto,
+        amarillo: colorCercaCriterio,
+        rojo: colorNoApto,
+        gris: colorSinDatos
+    };
+
+    capaSitios.eachLayer(function (layer) {
+        const id = obtenerIdCapa(layer);
+
+        const registro = id
+            ? resultadosConsultaActual.get(id)
+            : null;
+
+        const color = obtenerColorResultado(registro);
+
+        const mostrar =
+            seleccion === 'todos' ||
+            color === colores[seleccion];
+
+        if (mostrar) {
+            layer.setStyle({
+                opacity: 1,
+                fillOpacity: 0.95
+            });
+
+            // Reactivar la interacción
+            if (layer.getElement()) {
+                layer.getElement().style.pointerEvents = 'auto';
+            }
+
+        } else {
+            layer.setStyle({
+                opacity: 0,
+                fillOpacity: 0
+            });
+
+            // Impedir clics y etiquetas en puntos ocultos
+            if (layer.getElement()) {
+                layer.getElement().style.pointerEvents = 'none';
+            }
+
+            // Cerrar una ventana emergente si estaba abierta
+            if (layer.isPopupOpen()) {
+                layer.closePopup();
+            }
+
+            // Cerrar la etiqueta si estaba abierta
+            if (layer.isTooltipOpen()) {
+                layer.closeTooltip();
+            }
+        }
+    });
+}
+
+if (filtroResultado) {
+    filtroResultado.addEventListener(
+        'change',
+        aplicarFiltroResultado
+    );
+}
+// Actualizar el círculo del resultado seleccionado
+
+const circuloFiltroResultado =
+    document.getElementById('circulo-filtro-resultado');
+
+function actualizarCirculoFiltroResultado() {
+    const circulo = document.querySelector(
+        '#boton-filtro-resultado .circulo-resultado'
+    );
+
+    if (circulo) {
+        circulo.className = 'circulo-resultado ' + filtroResultado.value;
+    }
+}
+
+filtroResultado.addEventListener(
+    'change',
+    actualizarCirculoFiltroResultado
+);
 function consultarResultados() {
     const anio =
         document.getElementById(
@@ -338,6 +436,21 @@ if (leyendaPeriodo) {
         }
     });
 
+// Guardar los resultados del periodo consultado
+resultadosConsultaActual = resultadosPorId;
+
+// Activar el selector de colores
+if (filtroResultado) {
+    filtroResultado.disabled = false;
+    filtroResultado.value = 'todos';
+
+actualizarCirculoFiltroResultado();
+}
+
+if (mensajeFiltroResultado) {
+    mensajeFiltroResultado.textContent =
+        'Selecciona un color para filtrar los sitios del mapa.';
+}
     let sitiosConDatos = 0;
     let sitiosSinDatos = 0;
 
@@ -375,7 +488,7 @@ if (leyendaPeriodo) {
             sitiosSinDatos++;
         }
     });
-
+aplicarFiltroResultado();
     capaSitios.bringToFront();
 
     console.log(

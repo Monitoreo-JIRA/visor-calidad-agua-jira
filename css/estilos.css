@@ -2224,3 +2224,207 @@ body.panel-abierto .leaflet-control-scale {
     color: #687780;
     text-align: center;
 }
+/* Contador discreto en el pie de página */
+
+.contador-visitas {
+    display: block;
+    width: auto;
+    margin: 2px 14px 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    color: #DCE9EE;
+    font-size: 11px;
+    text-align: right;
+}
+
+.contador-visitas span {
+    font-weight: 600;
+}
+/* FILTRO DE SITIOS POR RESULTADO */
+
+.filtro-resultado-sitios {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #dce5e9;
+}
+
+.filtro-resultado-sitios label {
+    display: block;
+    margin-top: 3px;
+    margin-bottom: 7px;
+    color: #263238;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.selector-resultado {
+    position: relative;
+    width: 100%;
+}
+
+/* Utiliza el estilo original de .tarjeta-filtros select */
+.tarjeta-filtros .selector-resultado select {
+    padding-left: 30px;
+    color: #263238;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.circulo-resultado {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.circulo-resultado.todos {
+    background-color: #64748b;
+}
+
+.circulo-resultado.verde {
+    background-color: #2e9d50;
+}
+
+.circulo-resultado.amarillo {
+    background-color: #f2c94c;
+}
+
+.circulo-resultado.rojo {
+    background-color: #d9363e;
+}
+
+.circulo-resultado.gris {
+    background-color: #9e9e9e;
+}
+
+.selector-resultado:has(select:disabled) .circulo-resultado {
+    opacity: 0.55;
+}
+
+#mensaje-filtro-resultado {
+    margin: 7px 0 0;
+    color: #71818a;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+@media (max-width: 1200px) {
+    .filtro-resultado-sitios label {
+        font-size: 12px;
+    }
+}
+
+/* Desplegable visual del filtro por resultado */
+
+.tarjeta-filtros .selector-resultado .boton-filtro-resultado {
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 9px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #b9c7cd;
+    border-radius: 4px;
+    background: white;
+    color: #263238;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: left;
+    cursor: pointer;
+}
+
+.selector-resultado .circulo-resultado {
+    position: static;
+    display: inline-block;
+    flex: 0 0 11px;
+    width: 11px;
+    height: 11px;
+    transform: none;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.selector-resultado .flecha-filtro-resultado {
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    margin-right: 4px;
+    border-right: 2px solid #263238;
+    border-bottom: 2px solid #263238;
+    transform: translateY(-2px) rotate(45deg);
+}
+
+.selector-resultado .opciones-filtro-resultado {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    padding: 3px 0;
+    border: 1px solid #b9c7cd;
+    border-radius: 0 0 4px 4px;
+    background: white;
+    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.12);
+}
+
+.selector-resultado .opciones-filtro-resultado[hidden] {
+    display: none;
+}
+
+.selector-resultado .opciones-filtro-resultado button {
+    width: 100%;
+    min-height: 34px;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    background: white;
+    color: #263238;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.selector-resultado .opciones-filtro-resultado button:hover,
+.selector-resultado .opciones-filtro-resultado button.seleccionado {
+    background: #eaf3f6;
+}
+
+.selector-resultado .boton-filtro-resultado:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+    .tarjeta-filtros .selector-resultado .boton-filtro-resultado {
+        min-height: 34px;
+        font-size: 12px;
+    }
+
+    .selector-resultado .opciones-filtro-resultado button {
+        font-size: 12px;
+    }
+}
+.selector-resultado .circulo-resultado[hidden],
+.selector-resultado .opciones-filtro-resultado button[hidden] {
+    display: none !important;
+}
+
+.selector-resultado .opciones-filtro-resultado .opcion-quitar-filtro {
+    border-top: 1px solid #dce5e9;
+    color: #176f8f;
+    font-weight: 600;
+}

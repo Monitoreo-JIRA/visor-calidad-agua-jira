@@ -253,9 +253,78 @@
        </option>
       </select>
       <button class="boton-consulta" type="button">
-       Consultar
-      </button>
-     </section>
+    Consultar
+</button>
+
+<!-- FILTRO DE SITIOS POR RESULTADO -->
+<div class="filtro-resultado-sitios">
+
+    <label for="filtro-resultado">
+        Visualizar sitios por resultado
+    </label>
+
+
+<div class="selector-resultado" id="selector-resultado">
+
+    <select id="filtro-resultado" disabled hidden>
+        <option value="todos">Todos los sitios</option>
+        <option value="verde">Cumplen el criterio</option>
+        <option value="amarillo">Cerca del criterio</option>
+        <option value="rojo">Superan el criterio</option>
+        <option value="gris">Sin datos</option>
+    </select>
+
+    <button type="button"
+            id="boton-filtro-resultado"
+            class="boton-filtro-resultado"
+            aria-expanded="false"
+            disabled>
+        <span class="circulo-resultado todos"></span>
+        <span id="texto-filtro-resultado">Todos los sitios</span>
+        <span class="flecha-filtro-resultado"></span>
+    </button>
+
+    <div id="opciones-filtro-resultado"
+         class="opciones-filtro-resultado"
+         hidden>
+
+        <button type="button" data-resultado="verde">
+            <span class="circulo-resultado verde"></span>
+            Cumplen el criterio
+        </button>
+
+        <button type="button" data-resultado="amarillo">
+            <span class="circulo-resultado amarillo"></span>
+            Cerca del criterio
+        </button>
+
+        <button type="button" data-resultado="rojo">
+            <span class="circulo-resultado rojo"></span>
+            Superan el criterio
+        </button>
+
+        <button type="button" data-resultado="gris">
+            <span class="circulo-resultado gris"></span>
+            Sin datos
+        </button>
+        <button type="button"
+        data-resultado="todos"
+        class="opcion-quitar-filtro"
+        hidden>
+    Quitar filtro
+</button>
+
+    </div>
+</div>
+
+
+    <p id="mensaje-filtro-resultado">
+        Realiza una consulta para activar el filtro.
+    </p>
+
+</div>
+
+</section>
      <button class="boton-seccion" id="boton-graficas" type="button">
       Gr&aacute;ficas
      </button>
@@ -1213,5 +1282,6 @@
 <script src="js/glosario.js"></script>
 <script src="js/tour.js?v=3"></script>
 <script src="js/contador_visitas.js"></script>
+<script src="js/filtro_resultado_ui.js"></script>
  </body>
 </html>
