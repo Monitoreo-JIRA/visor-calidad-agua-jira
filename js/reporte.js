@@ -290,6 +290,7 @@ function obtenerRegistroMesReporte(
 // RESUMEN BACTERIOLÓGICO
 // ==========================================
 
+
 function obtenerResumenAnualReporte(registros) {
     const registrosConEcoli =
         registros.filter(registro =>
@@ -298,65 +299,66 @@ function obtenerResumenAnualReporte(registros) {
             ) !== null
         );
 
-    const registrosAptos =
+    const favorables =
         registrosConEcoli.filter(registro =>
             convertirNumeroReporte(
                 registro.E_coli_100mL
-            ) <= 200
+            ) < 100
         );
 
-    const registrosNoAptos =
+    const precaucion =
+        registrosConEcoli.filter(registro => {
+            const valor = convertirNumeroReporte(
+                registro.E_coli_100mL
+            );
+
+            return valor >= 100 && valor <= 235;
+        });
+
+    const desfavorables =
         registrosConEcoli.filter(registro =>
             convertirNumeroReporte(
                 registro.E_coli_100mL
-            ) > 200
+            ) > 235
         );
 
     let registroMaximo = null;
     let registroMinimo = null;
 
     registrosConEcoli.forEach(registro => {
-        const valor =
-            convertirNumeroReporte(
-                registro.E_coli_100mL
-            );
+        const valor = convertirNumeroReporte(
+            registro.E_coli_100mL
+        );
 
         if (
             !registroMaximo ||
-            valor >
-                convertirNumeroReporte(
-                    registroMaximo.E_coli_100mL
-                )
+            valor > convertirNumeroReporte(
+                registroMaximo.E_coli_100mL
+            )
         ) {
             registroMaximo = registro;
         }
 
         if (
             !registroMinimo ||
-            valor <
-                convertirNumeroReporte(
-                    registroMinimo.E_coli_100mL
-                )
+            valor < convertirNumeroReporte(
+                registroMinimo.E_coli_100mL
+            )
         ) {
             registroMinimo = registro;
         }
     });
 
     return {
-        monitoreos:
-            registrosConEcoli.length,
-
-        aptos:
-            registrosAptos.length,
-
-        noAptos:
-            registrosNoAptos.length,
-
+        monitoreos: registrosConEcoli.length,
+        favorables: favorables.length,
+        precaucion: precaucion.length,
+        desfavorables: desfavorables.length,
         registroMaximo,
-
         registroMinimo
     };
 }
+
 
 
 // ==========================================
@@ -562,7 +564,7 @@ function dibujarGraficaBacteriologicaReporte(
                     datasets: [
                         {
                             label:
-                                'E. coli (NMP/100 mL)',
+                                'E. coli (UFC/100 mL)',
 
                             data:
                                 valoresEcoli,
@@ -573,7 +575,7 @@ function dibujarGraficaBacteriologicaReporte(
 
                         {
                             label:
-                                'Coliformes totales (NMP/100 mL)',
+                                'Coliformes totales (UFC/100 mL)',
 
                             data:
                                 valoresColiformes,
@@ -639,7 +641,7 @@ function dibujarGraficaBacteriologicaReporte(
                                             formatearNumeroReporte(
                                                 valorReal
                                             ) +
-                                            ' NMP/100 mL'
+                                            ' UFC/100 mL'
                                         );
                                     }
                             }
@@ -649,8 +651,8 @@ function dibujarGraficaBacteriologicaReporte(
                             annotations: {
                                 criterioEcoli: {
                                     type: 'line',
-                                    yMin: 200,
-                                    yMax: 200,
+                                    yMin: 235,
+                                    yMax: 235,
 
                                     borderColor:
                                         '#444444',
@@ -666,7 +668,7 @@ function dibujarGraficaBacteriologicaReporte(
                                         display: true,
 
                                         content:
-                                            'Criterio E. coli: 200 NMP/100 mL',
+                                            'Valor de referencia: 235 UFC/100 mL',
 
                                         position: 'end',
 
@@ -701,7 +703,7 @@ function dibujarGraficaBacteriologicaReporte(
                             title: {
                                 display: true,
                                 text:
-                                    'NMP/100 mL'
+                                    'UFC/100 mL'
                             }
                         }
                     }
@@ -957,7 +959,7 @@ function generarReporteAnualSitio() {
                     resumen
                         .registroMaximo
                         .E_coli_100mL,
-                    'NMP/100 mL'
+                    'UFC/100 mL'
                 )}
                 (${resumen
                     .registroMaximo
@@ -972,7 +974,7 @@ function generarReporteAnualSitio() {
                     resumen
                         .registroMinimo
                         .E_coli_100mL,
-                    'NMP/100 mL'
+                    'UFC/100 mL'
                 )}
                 (${resumen
                     .registroMinimo
@@ -1064,39 +1066,31 @@ if (anioReporte) {
                 Resumen bacteriológico del año
             </h3>
 
-            <div class="reporte-indicadores">
+            
+<div class="reporte-indicadores">
 
-                <div class="indicador-monitoreos">
-                    <strong>
-                        ${resumen.monitoreos}
-                    </strong>
+    <div class="indicador-monitoreos">
+        <strong>${resumen.monitoreos}</strong>
+        <span>Monitoreos con resultado</span>
+    </div>
 
-                    <span>
-                        Monitoreos con resultado
-                    </span>
-                </div>
+    <div class="indicador-apto">
+        <strong>${resumen.favorables}</strong>
+        <span>Aptitud favorable</span>
+    </div>
 
-                <div class="indicador-apto">
-                    <strong>
-                        ${resumen.aptos}
-                    </strong>
+    <div class="indicador-precaucion">
+        <strong>${resumen.precaucion}</strong>
+        <span>Precaución</span>
+    </div>
 
-                    <span>
-                        Resultados aptos
-                    </span>
-                </div>
+    <div class="indicador-no-apto">
+        <strong>${resumen.desfavorables}</strong>
+        <span>Aptitud desfavorable</span>
+    </div>
 
-                <div class="indicador-no-apto">
-                    <strong>
-                        ${resumen.noAptos}
-                    </strong>
+</div>
 
-                    <span>
-                        Resultados no aptos
-                    </span>
-                </div>
-
-            </div>
 
             <div class="reporte-extremos">
 
@@ -1161,7 +1155,7 @@ if (anioReporte) {
                                 <em>E. coli</em>
 
                                 <small>
-                                    NMP/100 mL
+                                    UFC/100 mL
                                 </small>
                             </th>
 
@@ -1169,7 +1163,7 @@ if (anioReporte) {
                                 Coliformes totales
 
                                 <small>
-                                    NMP/100 mL
+                                    UFC/100 mL
                                 </small>
                             </th>
 
@@ -1324,14 +1318,10 @@ if (anioReporte) {
 
 
         <p class="reporte-nota">
-            El programa de monitoreo se realiza de manera
-            bimestral, en los meses de febrero, abril, junio,
-            agosto, octubre y diciembre. La aptitud recreativa
-            se evalúa con base en la concentración de
-            <em>E. coli</em>; conforme al criterio de la
-            COFEPRIS (2026), los sitios con valores de hasta
-            200 NMP/100 mL se consideran aptos para uso
-            recreativo de contacto primario.
+        El monitoreo de la calidad del agua se realiza cada dos meses, en febrero, abril, junio, agosto, octubre y diciembre.
+        Para conocer sus condiciones, se analiza la presencia de <em>E. coli</em>, una bacteria que puede indicar contaminación fecal. Los resultados se obtienen mediante placas Petrifilm y se expresan en unidades formadoras de colonias (UFC/100 mL).
+        El semáforo muestra una valoración orientativa de la aptitud del agua para actividades recreativas, tomando como referencia las guías de calidad del agua de Canadá y Estados Unidos (EPA). También se considera como referencia nacional el Manual de COFEPRIS (2026).
+        Los resultados son informativos y reflejan las condiciones del agua al momento del monitoreo.
         </p>
     `;
 

@@ -211,36 +211,38 @@ function obtenerRegistroSitioMesGeneral(
 // RESUMEN GENERAL
 // ==========================================
 
-function calcularResumenGeneral(
-    registros,
-    sitios
-) {
-    const registrosConEcoli =
-        registros.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) !== null
+
+function calcularResumenGeneral(registros, sitios) {
+
+    const registrosConEcoli = registros.filter(registro =>
+        convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        ) !== null
+    );
+
+    const favorables = registrosConEcoli.filter(registro =>
+        convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        ) < 100
+    );
+
+    const precaucion = registrosConEcoli.filter(registro => {
+        const valor = convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
         );
 
-    const aptos =
-        registrosConEcoli.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) <= 200
-        );
+        return valor >= 100 && valor <= 235;
+    });
 
-    const noAptos =
-        registrosConEcoli.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) > 200
-        );
+    const desfavorables = registrosConEcoli.filter(registro =>
+        convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        ) > 235
+    );
 
     const idsConDatos = new Set(
         registrosConEcoli.map(registro =>
-            String(
-                registro.ID_Sitio ?? ''
-            ).trim()
+            String(registro.ID_Sitio ?? '').trim()
         )
     );
 
@@ -248,39 +250,33 @@ function calcularResumenGeneral(
     let registroMinimo = null;
 
     registrosConEcoli.forEach(registro => {
-        const valor =
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            );
+
+        const valor = convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        );
 
         if (
             !registroMaximo ||
-            valor >
-                convertirNumeroReporteGeneral(
-                    registroMaximo.E_coli_100mL
-                )
+            valor > convertirNumeroReporteGeneral(
+                registroMaximo.E_coli_100mL
+            )
         ) {
             registroMaximo = registro;
         }
 
         if (
             !registroMinimo ||
-            valor <
-                convertirNumeroReporteGeneral(
-                    registroMinimo.E_coli_100mL
-                )
+            valor < convertirNumeroReporteGeneral(
+                registroMinimo.E_coli_100mL
+            )
         ) {
             registroMinimo = registro;
         }
     });
 
-    const porcentajeAptos =
+    const porcentajeFavorables =
         registrosConEcoli.length > 0
-            ? (
-                aptos.length /
-                registrosConEcoli.length *
-                100
-            )
+            ? favorables.length / registrosConEcoli.length * 100
             : 0;
 
     function obtenerNombreRegistro(registro) {
@@ -300,88 +296,64 @@ function calcularResumenGeneral(
     }
 
     return {
-        sitiosConDatos:
-            idsConDatos.size,
+        sitiosConDatos: idsConDatos.size,
+        totalResultados: registrosConEcoli.length,
 
-        totalResultados:
-            registrosConEcoli.length,
+        favorables: favorables.length,
+        precaucion: precaucion.length,
+        desfavorables: desfavorables.length,
 
-        aptos:
-            aptos.length,
-
-        noAptos:
-            noAptos.length,
-
-        porcentajeAptos,
+        porcentajeFavorables,
 
         registroMaximo,
-
         registroMinimo,
 
-        nombreMaximo:
-            obtenerNombreRegistro(
-                registroMaximo
-            ),
-
-        nombreMinimo:
-            obtenerNombreRegistro(
-                registroMinimo
-            )
+        nombreMaximo: obtenerNombreRegistro(registroMaximo),
+        nombreMinimo: obtenerNombreRegistro(registroMinimo)
     };
 }
-
 
 // ==========================================
 // RESUMEN POR SITIO
 // ==========================================
 
-function calcularResumenSitioGeneral(
-    idSitio,
-    registros
-) {
-    const registrosSitio =
-        registros.filter(registro =>
-            String(
-                registro.ID_Sitio ?? ''
-            ).trim() ===
-                String(idSitio).trim()
-        );
+function calcularResumenSitioGeneral(idSitio, registros) {
 
-    const registrosConEcoli =
-        registrosSitio.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) !== null
-        );
+    const registrosSitio = registros.filter(registro =>
+        String(registro.ID_Sitio ?? '').trim() ===
+        String(idSitio).trim()
+    );
 
-    const aptos =
-        registrosConEcoli.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) <= 200
-        ).length;
+    const registrosConEcoli = registrosSitio.filter(registro =>
+        convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        ) !== null
+    );
 
-    const noAptos =
-        registrosConEcoli.filter(registro =>
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            ) > 200
-        ).length;
-
+    let favorables = 0;
+    let precaucion = 0;
+    let desfavorables = 0;
     let registroMaximo = null;
 
     registrosConEcoli.forEach(registro => {
-        const valor =
-            convertirNumeroReporteGeneral(
-                registro.E_coli_100mL
-            );
+
+        const valor = convertirNumeroReporteGeneral(
+            registro.E_coli_100mL
+        );
+
+        if (valor < 100) {
+            favorables++;
+        } else if (valor <= 235) {
+            precaucion++;
+        } else {
+            desfavorables++;
+        }
 
         if (
             !registroMaximo ||
-            valor >
-                convertirNumeroReporteGeneral(
-                    registroMaximo.E_coli_100mL
-                )
+            valor > convertirNumeroReporteGeneral(
+                registroMaximo.E_coli_100mL
+            )
         ) {
             registroMaximo = registro;
         }
@@ -389,39 +361,42 @@ function calcularResumenSitioGeneral(
 
     let resultadoPredominante = 'Sin datos';
 
-    if (aptos > noAptos) {
+    if (registrosConEcoli.length > 0) {
+
+        const maximoConteo = Math.max(
+            favorables,
+            precaucion,
+            desfavorables
+        );
+
+        const categoriasPredominantes = [
+            { nombre: 'Aptitud favorable', cantidad: favorables },
+            { nombre: 'Precaución', cantidad: precaucion },
+            { nombre: 'Aptitud desfavorable', cantidad: desfavorables }
+        ].filter(categoria =>
+            categoria.cantidad === maximoConteo
+        );
+
         resultadoPredominante =
-            'Mayormente apto';
-    } else if (noAptos > aptos) {
-        resultadoPredominante =
-            'Mayormente no apto';
-    } else if (
-        aptos > 0 &&
-        aptos === noAptos
-    ) {
-        resultadoPredominante =
-            'Resultados iguales';
+            categoriasPredominantes.length === 1
+                ? categoriasPredominantes[0].nombre
+                : 'Sin predominio definido';
     }
 
     return {
-        monitoreos:
-            registrosConEcoli.length,
+        monitoreos: registrosConEcoli.length,
 
-        aptos,
+        favorables,
+        precaucion,
+        desfavorables,
 
-        noAptos,
+        maximo: registroMaximo
+            ? registroMaximo.E_coli_100mL
+            : null,
 
-        maximo:
-            registroMaximo
-                ? registroMaximo
-                    .E_coli_100mL
-                : null,
-
-        periodoMaximo:
-            registroMaximo
-                ? registroMaximo
-                    .Periodo_Muestreo
-                : null,
+        periodoMaximo: registroMaximo
+            ? registroMaximo.Periodo_Muestreo
+            : null,
 
         resultadoPredominante
     };
@@ -460,9 +435,9 @@ function crearFilasResumenSitiosGeneral(
 
                     <td>${resumen.monitoreos}</td>
 
-                    <td>${resumen.aptos}</td>
-
-                    <td>${resumen.noAptos}</td>
+                    <td>${resumen.favorables}</td>
+                    <td>${resumen.precaucion}</td>
+                    <td>${resumen.desfavorables}</td>     
 
                     <td>
                         ${formatearNumeroReporteGeneral(
@@ -526,14 +501,22 @@ function crearFilasPeriodosGeneral(
                                 valor
                             );
 
-                        let clase = '';
+                        
+let clase = '';
 
-                        if (numero !== null) {
-                            clase =
-                                numero <= 200
-                                    ? 'celda-apta'
-                                    : 'celda-no-apta';
-                        }
+if (numero !== null) {
+
+    if (numero < 100) {
+        clase = 'celda-apta';
+
+    } else if (numero <= 235) {
+        clase = 'celda-precaucion';
+
+    } else {
+        clase = 'celda-no-apta';
+    }
+
+}
 
                         return `
                             <td class="${clase}">
@@ -617,7 +600,7 @@ function generarReporteAnualGeneral() {
                         .registroMaximo
                         .E_coli_100mL
                 )}
-                NMP/100 mL
+                UFC/100 mL
                 (${obtenerNombreMesReporteGeneral(
                     resumen
                         .registroMaximo
@@ -635,7 +618,7 @@ function generarReporteAnualGeneral() {
                         .registroMinimo
                         .E_coli_100mL
                 )}
-                NMP/100 mL
+                UFC/100 mL
                 (${obtenerNombreMesReporteGeneral(
                     resumen
                         .registroMinimo
@@ -690,69 +673,67 @@ function generarReporteAnualGeneral() {
                     </span>
                 </div>
 
-                <div class="indicador-apto">
-                    <strong>
-                        ${resumen.aptos}
-                    </strong>
+                
+<div class="indicador-apto">
+    <strong>
+        ${resumen.favorables}
+    </strong>
+    <span>
+        Aptitud favorable
+    </span>
+</div>
 
-                    <span>
-                        Resultados aptos
-                    </span>
-                </div>
+<div class="indicador-precaucion">
+    <strong>
+        ${resumen.precaucion}
+    </strong>
+    <span>
+        Precaución
+    </span>
+</div>
 
-                <div class="indicador-no-apto">
-                    <strong>
-                        ${resumen.noAptos}
-                    </strong>
+<div class="indicador-no-apto">
+    <strong>
+        ${resumen.desfavorables}
+    </strong>
+    <span>
+        Aptitud desfavorable
+    </span>
+</div>
 
-                    <span>
-                        Resultados no aptos
-                    </span>
-                </div>
 
-                <div class="indicador-monitoreos">
-                    <strong>
-                        ${
-                            resumen
-                                .porcentajeAptos
-                                .toLocaleString(
-                                    'es-MX',
-                                    {
-                                        maximumFractionDigits:
-                                            1
-                                    }
-                                )
-                        } %
-                    </strong>
+<div class="indicador-monitoreos">
+    <strong>
+        ${resumen.porcentajeFavorables.toLocaleString(
+            'es-MX',
+            { maximumFractionDigits: 1 }
+        )} %
+    </strong>
+    <span>
+        Resultados con aptitud favorable
+    </span>
+</div>
 
-                    <span>
-                        Resultados aptos
-                    </span>
-                </div>
+</div> <!-- Cierra el contenedor de indicadores -->
 
-            </div>
+<div class="reporte-extremos">
+    <p>
+        <strong>
+            Mayor concentración de
+            <em>E. coli</em>:
+        </strong>
+        ${textoMaximo}
+    </p>
 
-            <div class="reporte-extremos">
+    <p>
+        <strong>
+            Menor concentración de
+            <em>E. coli</em>:
+        </strong>
+        ${textoMinimo}
+    </p>
+</div>
 
-                <p>
-                    <strong>
-                        Mayor concentración de
-                        <em>E. coli</em>:
-                    </strong>
-
-                    ${textoMaximo}
-                </p>
-
-                <p>
-                    <strong>
-                        Menor concentración de
-                        <em>E. coli</em>:
-                    </strong>
-
-                    ${textoMinimo}
-                </p>
-
-            </div>
 
         </section>
 
@@ -772,17 +753,19 @@ function generarReporteAnualGeneral() {
 
                     <thead>
                         <tr>
-                            <th>Sitio</th>
-                            <th>Subcuenca</th>
-                            <th>Monitoreos</th>
-                            <th>Aptos</th>
-                            <th>No aptos</th>
+                            
+                        <th>Sitio</th>
+                        <th>Subcuenca</th>
+                        <th>Monitoreos</th>
+                        <th>Aptitud favorable</th>
+                        <th>Precaución</th>
+                        <th>Aptitud desfavorable</th>
 
                             <th>
                                 Máximo de
                                 <em>E. coli</em>
                                 <small>
-                                    NMP/100 mL
+                                    UFC/100 mL
                                 </small>
                             </th>
 
@@ -845,14 +828,10 @@ function generarReporteAnualGeneral() {
 
 
         <p class="reporte-nota">
-            El programa de monitoreo se realiza de manera
-            bimestral, en febrero, abril, junio, agosto,
-            octubre y diciembre. La aptitud recreativa se
-            evalúa con base en la concentración de
-            <em>E. coli</em>. Conforme al criterio de la
-            COFEPRIS (2026), los resultados de hasta
-            200 NMP/100 mL se consideran aptos para uso
-            recreativo de contacto primario.
+        El monitoreo de la calidad del agua se realiza cada dos meses, en febrero, abril, junio, agosto, octubre y diciembre.
+        Para conocer sus condiciones, se analiza la presencia de (<em>E. coli</em>), una bacteria que puede indicar contaminación fecal. Los resultados se obtienen mediante placas Petrifilm y se expresan en unidades formadoras de colonias (UFC/100 mL).
+        El semáforo muestra una valoración orientativa de la aptitud del agua para actividades recreativas, tomando como referencia las guías de calidad del agua de Canadá y Estados Unidos (EPA). También se considera como referencia nacional el Manual de COFEPRIS (2026).
+        Los resultados son informativos y reflejan las condiciones del agua al momento del monitoreo.
         </p>
     `;
 

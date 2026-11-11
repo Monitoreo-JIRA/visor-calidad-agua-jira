@@ -266,13 +266,15 @@
 
 <div class="selector-resultado" id="selector-resultado">
 
-    <select id="filtro-resultado" disabled hidden>
-        <option value="todos">Todos los sitios</option>
-        <option value="verde">Cumplen el criterio</option>
-        <option value="amarillo">Cerca del criterio</option>
-        <option value="rojo">Superan el criterio</option>
-        <option value="gris">Sin datos</option>
-    </select>
+   
+<select id="filtro-resultado" disabled hidden>
+    <option value="todos">Todos los sitios</option>
+    <option value="verde">Aptitud favorable</option>
+    <option value="amarillo">Precaución</option>
+    <option value="rojo">Aptitud desfavorable</option>
+    <option value="gris">Sin datos</option>
+</select>
+
 
     <button type="button"
             id="boton-filtro-resultado"
@@ -284,39 +286,39 @@
         <span class="flecha-filtro-resultado"></span>
     </button>
 
-    <div id="opciones-filtro-resultado"
-         class="opciones-filtro-resultado"
-         hidden>
+<div id="opciones-filtro-resultado"
+     class="opciones-filtro-resultado"
+     hidden>
 
-        <button type="button" data-resultado="verde">
-            <span class="circulo-resultado verde"></span>
-            Cumplen el criterio
-        </button>
+    <button type="button" data-resultado="verde">
+        <span class="circulo-resultado verde"></span>
+        Aptitud favorable
+    </button>
 
-        <button type="button" data-resultado="amarillo">
-            <span class="circulo-resultado amarillo"></span>
-            Cerca del criterio
-        </button>
+    <button type="button" data-resultado="amarillo">
+        <span class="circulo-resultado amarillo"></span>
+        Precaución
+    </button>
 
-        <button type="button" data-resultado="rojo">
-            <span class="circulo-resultado rojo"></span>
-            Superan el criterio
-        </button>
+    <button type="button" data-resultado="rojo">
+        <span class="circulo-resultado rojo"></span>
+        Aptitud desfavorable
+    </button>
 
-        <button type="button" data-resultado="gris">
-            <span class="circulo-resultado gris"></span>
-            Sin datos
-        </button>
-        <button type="button"
-        data-resultado="todos"
-        class="opcion-quitar-filtro"
-        hidden>
-    Quitar filtro
-</button>
+    <button type="button" data-resultado="gris">
+        <span class="circulo-resultado gris"></span>
+        Sin datos
+    </button>
 
-    </div>
+    <button type="button"
+            data-resultado="todos"
+            class="opcion-quitar-filtro"
+            hidden>
+        Quitar filtro
+    </button>
+
 </div>
-
+</div>
 
     <p id="mensaje-filtro-resultado">
         Realiza una consulta para activar el filtro.
@@ -518,49 +520,44 @@
         Límites municipales
     </label>
 </div>
+<div class="panel-mapa-flotante oculto" id="panel-leyenda-flotante">
+    <div class="panel-mapa-encabezado">
+        <strong>Simbología bacteriológica</strong>
+        <button
+            aria-label="Cerrar panel de simbología"
+            id="cerrar-panel-leyenda"
+            type="button">
+            &times;
+        </button>
     </div>
-    <div class="panel-mapa-flotante oculto" id="panel-leyenda-flotante">
-     <div class="panel-mapa-encabezado">
-      <strong>
-       Simbolog&iacute;a bacteriol&oacute;gica
-      </strong>
-      <button aria-label="Cerrar panel de simbolog&iacute;a" id="cerrar-panel-leyenda" type="button">
-       &times;
-      </button>
-     </div>
-     <div class="panel-mapa-contenido panel-simbologia-contenido">
-      <div class="item-simbologia">
-       <span class="simbolo apto">
-       </span>
-       <span>
-        Apto
-       </span>
-      </div>
-      <div class="item-simbologia">
-       <span class="simbolo moderado">
-       </span>
-       <span>
-        Cerca del criterio
-       </span>
-      </div>
-      <div class="item-simbologia">
-       <span class="simbolo no-apto">
-       </span>
-       <span>
-        No apto
-       </span>
-      </div>
-      <div class="item-simbologia">
-       <span class="simbolo sin-datos">
-       </span>
-       <span>
-        Sin datos
-       </span>
-      </div>
-     </div>
+
+    <div class="panel-mapa-contenido panel-simbologia-contenido">
+
+        <div class="item-simbologia">
+            <span class="simbolo apto"></span>
+            <span>Aptitud favorable</span>
+        </div>
+
+        <div class="item-simbologia">
+            <span class="simbolo moderado"></span>
+            <span>Precaución</span>
+        </div>
+
+        <div class="item-simbologia">
+            <span class="simbolo no-apto"></span>
+            <span>Aptitud desfavorable</span>
+        </div>
+
+        <div class="item-simbologia">
+            <span class="simbolo sin-datos"></span>
+            <span>Sin datos</span>
+        </div>
+
     </div>
-   </section>
-  </main>
+</div>
+</section>
+</main>
+
   <!-- =====================================
      GLOSARIO DE PARÁMETROS
 ====================================== -->
@@ -659,7 +656,7 @@
                         </h3>
 
                         <span class="glosario-unidad">
-                            NMP/100 mL
+                            UFC/100 mL
                         </span>
 
                     </div>
@@ -696,7 +693,7 @@
                         </h3>
 
                         <span class="glosario-unidad">
-                            NMP/100 mL
+                            UFC/100 mL
                         </span>
 
                     </div>
@@ -906,7 +903,7 @@
                 <article class="glosario-parametro">
 
                     <div class="glosario-parametro-titulo">
-                        <h3>NMP/100 mL</h3>
+                        <h3>UFC/100 mL</h3>
 
                         <span class="glosario-unidad">
                             Microbiología
@@ -915,10 +912,9 @@
 
                     <p>
                         <strong>
-                            Número Más Probable por 100 mililitros.
+                            Unidades Formadoras de Colonias por 100 mililitros.
                         </strong>
-                        Es una estimación de la concentración de
-                        microorganismos presentes en una muestra de agua.
+                        Indica la cantidad estimada de bacterias presentes en una muestra de agua, a partir del conteo de colonias que crecen en un medio de cultivo.
                     </p>
 
                 </article>

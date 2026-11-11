@@ -42,6 +42,7 @@ function obtenerValorEcoli(registro) {
 }
 
 
+
 function obtenerColorResultado(registro) {
     const eColi = obtenerValorEcoli(registro);
 
@@ -53,7 +54,7 @@ function obtenerColorResultado(registro) {
         return colorApto;
     }
 
-    if (eColi <= 200) {
+    if (eColi <= 235) {
         return colorCercaCriterio;
     }
 
@@ -65,12 +66,18 @@ function obtenerAptitudResultado(registro) {
     const eColi = obtenerValorEcoli(registro);
 
     if (eColi === null) {
-        return 'SD';
+        return 'Sin datos';
     }
 
-    return eColi <= 200
-        ? 'Apto'
-        : 'No apto';
+    if (eColi < 100) {
+        return 'Aptitud favorable';
+    }
+
+    if (eColi <= 235) {
+        return 'Precaución';
+    }
+
+    return 'Aptitud desfavorable';
 }
 
 
@@ -82,14 +89,14 @@ function obtenerInterpretacionResultado(registro) {
     }
 
     if (eColi < 100) {
-        return 'Cumple el criterio';
+        return 'Concentración baja de <em>E. coli</em>';
     }
 
-    if (eColi <= 200) {
-        return 'Cerca del criterio';
+    if (eColi <= 235) {
+        return 'Concentración cercana al valor de referencia';
     }
 
-    return 'Supera el criterio';
+    return 'Supera el valor de referencia';
 }
 
 
@@ -240,11 +247,11 @@ function crearPopupResultado(
             ${informacionSitio}
 
             <div class="popup-linea">
-                <span class="popup-etiqueta">E. coli</span>
+                <span class="popup-etiqueta"><i>E. coli</i></span>
                 <span>
                     ${formatearValor(
                         registro.E_coli_100mL
-                    )} NMP/100 mL
+                    )} UFC/100 mL
                 </span>
             </div>
 
@@ -253,7 +260,7 @@ function crearPopupResultado(
                 <span>
                     ${formatearValor(
                         registro.Coliformes_Totales_100mL
-                    )} NMP/100 mL
+                    )} UFC/100 mL
                 </span>
             </div>
 

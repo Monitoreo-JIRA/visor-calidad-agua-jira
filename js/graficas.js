@@ -283,7 +283,7 @@ function dibujarGraficaBacteriologica(
                 datasets: [
                     {
                         label:
-                            'E. coli (NMP/100 mL)',
+                            'E. coli (UFC/100 mL)',
                         data: valoresEcoli,
                         tension: 0.25,
                         spanGaps: false
@@ -291,7 +291,7 @@ function dibujarGraficaBacteriologica(
 
                     {
                         label:
-                            'Coliformes totales (NMP/100 mL)',
+                            'Coliformes totales (UFC/100 mL)',
                         data: valoresColiformes,
                         tension: 0.25,
                         spanGaps: false
@@ -371,7 +371,7 @@ function dibujarGraficaBacteriologica(
                                         .label +
                                     ': ' +
                                     valorFormateado +
-                                    ' NMP/100 mL'
+                                    ' UFC/100 mL'
                                 );
                             }
                         }
@@ -381,8 +381,8 @@ function dibujarGraficaBacteriologica(
                         annotations: {
                             criterioEcoli: {
                                 type: 'line',
-                                yMin: 200,
-                                yMax: 200,
+                                yMin: 235,
+                                yMax: 235,
                                 borderColor:
                                     '#444444',
                                 borderWidth: 2,
@@ -394,7 +394,7 @@ function dibujarGraficaBacteriologica(
                                 label: {
                                     display: true,
                                     content:
-                                        'Criterio E. coli: 200 NMP/100 mL',
+                                        'Valor de referencia: 235 UFC/100 mL',
                                     position: 'end',
                                     backgroundColor:
                                         'rgba(255, 255, 255, 0.92)',
@@ -425,7 +425,7 @@ function dibujarGraficaBacteriologica(
                         title: {
                             display: true,
                             text:
-                                'NMP/100 mL'
+                                'UFC/100 mL'
                         },
 
                         ticks: {
@@ -437,7 +437,7 @@ function dibujarGraficaBacteriologica(
                                         1,
                                         10,
                                         100,
-                                        200,
+                                        235,
                                         1000,
                                         10000,
                                         25000
